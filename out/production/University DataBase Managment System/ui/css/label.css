@@ -1,0 +1,58 @@
+.label:hover {
+    -fx-text-fill: #006699;
+}
+
+#messageLabel {
+    -fx-text-fill: red;
+}
+
+.transparentButton {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: 0;
+    -fx-text-fill: blue;
+}
+
+#submitButton {
+    -fx-background-color: #2E81EC;
+    -fx-text-fill: white;
+}
+
+#deleteButton {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+#loadButton {
+    -fx-background-color: #11B93E;
+    -fx-text-fill: white;
+}
+
+#clearButton {
+    -fx-background-color: #F53C3C;
+    -fx-text-fill: white;
+}
+
+.title {
+    -fx-text-fill: grey;
+}
+.mainBlack{
+    -fx-background-color: #2A2E43;
+    -fx-text-fill: white;
+   /* -fx-background-color: 0xFF2A2E43;*/
+}
+.inputLabel{
+    -fx-text-fill: white;
+}
+.inputField{
+    -fx-background-color: #454F63;
+    -fx-text-fill: white;
+}
+.table-view{
+    -fx-background-color: transparent;
+}
+.checkBox{
+    -fx-background-color: #454F63;
+    -fx-text-fill: white;
+}
