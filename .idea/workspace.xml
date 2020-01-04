@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added joinAndFetch Method">
+      <change afterPath="$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/DataBaseManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/DataBaseManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/University DataBase Managment System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/University DataBase Managment System.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/University DataBase Managment System/ui/pages/MainPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/University DataBase Managment System/ui/pages/MainPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/University DataBase Managment System/ui/pages/customer/LogIn$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/University DataBase Managment System/ui/pages/customer/LogIn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/pages/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/pages/customer/LogIn.java" beforeDir="false" />
     </list>
     <list id="f9f724e7-3e13-4755-87a0-dd11291cc7b5" name="Changelist2" comment="" />
     <ignored path="JavaFxApplication.iws" />
@@ -128,23 +134,53 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="604409966">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="3" />
+          <entry key="jpeg" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Image" value="1" />
+          <entry key="JAVA" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="415" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="415" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/Student.java">
+        <entry file="file://$PROJECT_DIR$/src/database/DataBaseManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1819">
-              <caret line="155" column="20" selection-start-line="155" selection-start-column="20" selection-end-line="155" selection-end-column="20" />
+            <state relative-caret-position="34">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ui/pages/customer/registrar/StudentWindow.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2091">
-              <caret line="140" column="17" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="17" />
+            <state relative-caret-position="152">
+              <caret line="60" selection-start-line="60" selection-end-line="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -153,19 +189,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/Department_Course.java">
+        <entry file="file://$PROJECT_DIR$/src/ui/pages/MainPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/database/DataBaseManagement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            <state relative-caret-position="-260">
+              <caret line="16" column="88" selection-start-line="16" selection-start-column="88" selection-end-line="16" selection-end-column="88" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -238,8 +268,8 @@
         <option value="Singleton" />
         <option value="CSS File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -254,7 +284,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ui/pages/AddPageType.java" />
         <option value="$PROJECT_DIR$/src/ui/pages/AddStudent.java" />
         <option value="$PROJECT_DIR$/src/models/Dependants.java" />
         <option value="$PROJECT_DIR$/src/models/faculty/Staff.java" />
@@ -272,7 +301,6 @@
         <option value="$PROJECT_DIR$/src/models/RegistrarAccount.java" />
         <option value="$PROJECT_DIR$/src/models/Account.java" />
         <option value="$PROJECT_DIR$/src/models/Account/Account.java" />
-        <option value="$PROJECT_DIR$/src/ui/pages/MainPage.java" />
         <option value="$PROJECT_DIR$/src/ui/pages/customer/AddAndEditStudent.java" />
         <option value="$PROJECT_DIR$/src/database/Column.java" />
         <option value="$PROJECT_DIR$/src/database/TableColumns.java" />
@@ -280,7 +308,6 @@
         <option value="$PROJECT_DIR$/src/database/TableColumn.java" />
         <option value="$PROJECT_DIR$/src/assistingClasses/TableColumn.java" />
         <option value="$PROJECT_DIR$/src/ui/customWidget/MyTabelView.java" />
-        <option value="$PROJECT_DIR$/src/ui/pages/customer/LogIn.java" />
         <option value="$PROJECT_DIR$/src/ui/pages/customer/SearchStudent.java" />
         <option value="$PROJECT_DIR$/src/ui/customWidget/RegistrarInputs.java" />
         <option value="$PROJECT_DIR$/src/ui/customWidget/LeftWindow.java" />
@@ -305,6 +332,9 @@
         <option value="$PROJECT_DIR$/src/models/Program.java" />
         <option value="$PROJECT_DIR$/src/ui/pages/customer/registrar/StudentWindow.java" />
         <option value="$PROJECT_DIR$/src/database/DataBaseManagement.java" />
+        <option value="$PROJECT_DIR$/src/ui/pages/customer/LogIn.java" />
+        <option value="$PROJECT_DIR$/src/ui/pages/MainPage.java" />
+        <option value="$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java" />
       </list>
     </option>
   </component>
@@ -338,7 +368,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -346,6 +376,11 @@
             <path>
               <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
               <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
+              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
@@ -375,13 +410,6 @@
               <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="customWidget" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -391,36 +419,11 @@
               <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="customer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="customer" type="462c0819:PsiDirectoryNode" />
-              <item name="registrar" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -434,9 +437,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577833468444" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578180041075" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java/Project/LibraryManagment/sqlite-jdbc-3.27.2.1.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -665,6 +668,7 @@
       <workItem from="1577504096505" duration="29000" />
       <workItem from="1577828170250" duration="5090000" />
       <workItem from="1577921131315" duration="1795000" />
+      <workItem from="1578176659489" duration="3350000" />
     </task>
     <task id="LOCAL-00001" summary="Added Basic Model classes">
       <created>1573859325474</created>
@@ -810,12 +814,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155570000" />
+    <option name="totallyTimeSpent" value="158920000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.23903178" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.20272315" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" weight="0.32980332" />
       <window_info id="Designer" order="3" />
@@ -824,8 +829,8 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.20983607" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.20655738" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.17213115" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.26065573" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.17213115" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -888,12 +893,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ui/pages/MainPage.java</url>
-          <line>18</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Account/Account.java</url>
           <line>58</line>
           <properties />
@@ -951,6 +950,36 @@
           </properties>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java</url>
+          <line>41</line>
+          <properties />
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java</url>
+          <line>61</line>
+          <properties />
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java</url>
+          <line>64</line>
+          <properties />
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -959,7 +988,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ui/sample/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/ui/sample/Controller.java" />
     <entry file="file://$PROJECT_DIR$/src/ui/sample/sample.fxml" />
     <entry file="file://$PROJECT_DIR$/src/database/Connexion.java" />
@@ -970,9 +998,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../Java/Project/LibraryManagment/src/Search.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/javafx/scene/control/Label.java" />
-    <entry file="file://$PROJECT_DIR$/assets/class.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/jre/lib/rt.jar!/java/lang/Object.class" />
     <entry file="file://$PROJECT_DIR$/../../Java/Project/ChessGame/src/GUI/ChessBoardUI.java" />
     <entry file="file://$PROJECT_DIR$/src/ui/customeWidget.java" />
@@ -1070,16 +1095,6 @@
     <entry file="file://$PROJECT_DIR$/src/ui/pages/Testing.java" />
     <entry file="file://$PROJECT_DIR$/src/assistingclasses/MyButton.java" />
     <entry file="file://$PROJECT_DIR$/src/ui/customWidget/LeftWindow.java" />
-    <entry file="file://$PROJECT_DIR$/src/ui/pages/MainPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/customWidget/MyButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1098,9 +1113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1125,13 +1137,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="918">
           <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/pages/customer/LogIn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
@@ -1226,8 +1231,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/DataBaseManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        <state relative-caret-position="34">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/pages/customer/LogIn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="82" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/class.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/pages/MainPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-260">
+          <caret line="16" column="88" selection-start-line="16" selection-start-column="88" selection-end-line="16" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/customWidget/LoginDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

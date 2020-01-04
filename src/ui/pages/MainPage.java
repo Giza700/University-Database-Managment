@@ -9,13 +9,12 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import ui.customWidget.LoginDialog;
 import ui.pages.admin.AdminPage;
-import ui.pages.customer.LogIn;
 
 
 public class MainPage extends Application {
     //   Image image = new Image(getClass().getResource("class.jpeg").toExternalForm());
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,8 +24,7 @@ public class MainPage extends Application {
         Label openRegistrar = new Label("Registrar");
         openRegistrar.getStylesheets().add("ui/css/label.css");
         openRegistrar.setOnMouseClicked(event -> {
-            new LogIn();
-            primaryStage.close();
+            new LoginDialog(primaryStage);
         });
 
         Label openAdmin = new Label("Admin");
