@@ -17,6 +17,7 @@ public class LoginDialog {
         loginDialog = new Dialog<>();
         loginDialog.setTitle("Login");
         loginDialog.setHeaderText("Login into your account");
+
         //loginDialog.setGraphic();
 
         Label messageLabel = new Label();

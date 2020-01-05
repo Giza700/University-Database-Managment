@@ -14,10 +14,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Program;
 import models.Student;
-import ui.customWidget.CheckBoxGrid;
+import ui.customWidget.RadioButtonGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
-import ui.customWidget.MyTextField;
+
 
 public class StudentWindow {
     private BorderPane window;
@@ -38,7 +38,7 @@ public class StudentWindow {
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
-        CheckBoxGrid checkBox = new CheckBoxGrid(
+        RadioButtonGrid checkBox = new RadioButtonGrid(
                 Constants.STUDENT_INPUTS[0],
                 Constants.STUDENT_INPUTS[1],
                 Constants.STUDENT_INPUTS[2],
@@ -61,7 +61,7 @@ public class StudentWindow {
 
         HBox searchRow = new HBox();
         searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, checkBox.getCheckBoxGrid());
+        searchRow.getChildren().addAll(search, checkBox.getRadioButtonGrid());
 
         VBox searchBar = new VBox(searchRow, new Separator());
         searchBar.setPadding(new Insets(10, 0, 0, 10));
@@ -141,7 +141,7 @@ public class StudentWindow {
         sections.setPromptText("Section");
 
 
-        vBox.getChildren().addAll(collages,departments, programs, years, sections);
+        vBox.getChildren().addAll(collages,programs,departments, years, sections);
         window.setLeft(vBox);
     }
 

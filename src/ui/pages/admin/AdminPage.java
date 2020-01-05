@@ -25,7 +25,7 @@ public class AdminPage {
         Application adminPage = new Application() {
             @Override
             public void start(Stage primaryStage) throws Exception {
-                CheckBoxGrid checkBoxGrid = new CheckBoxGrid(
+                RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
                         Constants.REGISTRAR_INPUTS[0],
                         Constants.REGISTRAR_INPUTS[1],
                         Constants.REGISTRAR_INPUTS[2],
@@ -39,7 +39,7 @@ public class AdminPage {
 
                 HBox searchRow = new HBox();
                 searchRow.setSpacing(5);
-                searchRow.getChildren().addAll(search, checkBoxGrid.getCheckBoxGrid());
+                searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
 
                 VBox searchBar = new VBox();
                 searchBar.setPadding(new Insets(10, 5, 2, 10));

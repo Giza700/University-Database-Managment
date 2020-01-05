@@ -1,6 +1,7 @@
 package models.faculty;
 
 import models.Sex;
+
 import java.time.LocalDate;
 
 
@@ -9,9 +10,12 @@ public class Teacher extends Staff {
 
     private String rank;
     private int department_Id;
-   /* private int courses_Id; //TODO These fields have already been mapped to their own table
-                                 so they no longer belong here
-    private int sections_Id;*/
+    private int courses_Id;
+    /**
+     * These fields have already been mapped to their own table
+     * so they no longer belong here
+     */
+    private int sections_Id;
 
     public Teacher(
             String firstName,
