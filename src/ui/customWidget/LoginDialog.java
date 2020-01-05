@@ -51,7 +51,7 @@ public class LoginDialog {
                             }
                         }
                         if (accountMatches) {
-                            new RegistrarPage();
+                            new RegistrarPage(parentPrimaryStage);
                             loginDialog.close();
                             parentPrimaryStage.close();
                         }
