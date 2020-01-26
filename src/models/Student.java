@@ -142,18 +142,5 @@ public class Student {
         this.departmentId = departmentId;
     }
 
-    public static String getLocalDateString(LocalDate localDate) {
-        return localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-    }
-
-    public static LocalDate getLocalDateFromString(String dateString) {
-        try {
-            String[] dateArray = dateString.split("/");
-            return LocalDate.of(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[0]));
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Index out of Bound in Student getLocalDateFromString method");
-        }
-        return null;
-    }
 
 }

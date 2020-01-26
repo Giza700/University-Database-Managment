@@ -55,7 +55,7 @@ class StudentWindow {
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
         });
 
         HBox searchRow = new HBox();
@@ -106,19 +106,19 @@ class StudentWindow {
 
     private void setWindowLeft() {
         ObservableList<String> collage = FXCollections.observableArrayList();
-        collage.addAll("AAIT","CNCS","CBE","CDS","CEBS","CHS","CHLJC","CLGS","CSS","CVMA","CPVA");
+        collage.addAll("AAIT", "CNCS", "CBE", "CDS", "CEBS", "CHS", "CHLJC", "CLGS", "CSS", "CVMA", "CPVA");
 
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
         ObservableList<Program> program = FXCollections.observableArrayList();
-        program.addAll(Program.Under_Grad,Program.Grad,Program.Post_Grad);
+        program.addAll(Program.Under_Grad, Program.Grad, Program.Post_Grad);
 
         ObservableList<Integer> year = FXCollections.observableArrayList();
-        year.addAll(1,2,3,4,5);
+        year.addAll(1, 2, 3, 4, 5);
 
         ObservableList<String> section = FXCollections.observableArrayList();
-        section.addAll("A","B","C","D");
+        section.addAll("A", "B", "C", "D");
 
         VBox vBox = new VBox(10);
         vBox.setPadding(new Insets(10));
@@ -140,7 +140,7 @@ class StudentWindow {
         sections.setPromptText("Section");
 
 
-        vBox.getChildren().addAll(collages,programs,departments, years, sections);
+        vBox.getChildren().addAll(collages, programs, departments, years, sections);
         window.setLeft(vBox);
     }
 
@@ -215,9 +215,11 @@ class StudentWindow {
         else if (i == 2) return "id";
         else if (i == 3) return "sex";
         else if (i == 4) return "dob";
-        else if (i == 5) return "address";
-        else if (i == 6) return "year";
-        else if (i == 7) return "phoneNumber";
+        else if (i == 5) return "phoneNumber";
+        else if (i == 6) return "city";
+        else if (i == 7) return "subCity";
+        else if (i == 8) return "street";
+        else if (i == 9) return "houseNo";
         else return "firstName";
     }
 
@@ -236,7 +238,7 @@ class StudentWindow {
                 new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[9]), "street"),
                 new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[10]), "houseNo")
         );
-       searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
+        searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
     }
 
     private void onEditButtonClicked() {
@@ -267,7 +269,7 @@ class StudentWindow {
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[2], student.getId());
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[3], student.getSex().toString());
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[4], Integer.toString(student.getYear()));
-            editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[5], models.Student.getLocalDateString(student.getDataOfBirth()));
+            editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[5], Constants.getLocalDateString(student.getDataOfBirth()));
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[6], Integer.toString(student.getPhoneNumber()));
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[7], student.getCity());
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[8], student.getSubCity());

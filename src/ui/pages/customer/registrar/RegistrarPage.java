@@ -36,8 +36,7 @@ public class RegistrarPage {
                     new StudentWindow(window, toolBar);
                 });
                 MyButton teachersSection = new MyButton("Teachers", event -> {
-                    window.setCenter(new Label("Teacher Page"));
-                    window.setRight(null);
+                    new TeacherWindow(window,toolBar);
                 });
                 MyButton courseSection = new MyButton("Course", event -> {
                     window.setCenter(new Label("StudentWindow Page"));

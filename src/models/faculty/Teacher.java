@@ -30,8 +30,8 @@ public class Teacher extends Staff {
             String city,
             double salary,
             String officeNumber,
-            String rank,
-            int department_Id) {
+            String rank
+            /*int department_Id*/) {
         super(
                 id,
                 firstName,
@@ -46,7 +46,7 @@ public class Teacher extends Staff {
                 salary,
                 officeNumber);
         this.rank = rank;
-        this.department_Id = department_Id;
+       /* this.department_Id = department_Id;*/
     }
 
     public String getRank() {
