@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import ui.customWidget.LoginDialog;
 import ui.pages.admin.AdminPage;
 import ui.pages.customer.registrar.RegistrarPage;
 

@@ -53,7 +53,7 @@ public class DataBaseManagement {
         }
         query += " FROM " + tableName;
         if (!newValue.equals("")) {
-            query += " WHERE " + comparingColumn + " LIKE '%" + newValue + "%'";
+            query += " WHERE " + comparingColumn + " LIKE '" + newValue + "%'";
         }
         try {
             Statement statement = connection.createStatement();
@@ -89,7 +89,6 @@ public class DataBaseManagement {
             e.printStackTrace();
         }
         return null;
-
     }
 
     private ObservableList<RegistrarAccount> makeRegistrarAccountObservable(ResultSet resultSet) {

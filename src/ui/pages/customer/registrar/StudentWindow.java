@@ -19,7 +19,7 @@ import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
 
 
-public class StudentWindow {
+class StudentWindow {
     private BorderPane window;
     private Inputs addNew;
     private Inputs editExisting;
@@ -34,11 +34,11 @@ public class StudentWindow {
         setWindowRight();
     }
 
-    public void setWindowTop(ToolBar toolBar) {
+    private void setWindowTop(ToolBar toolBar) {
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
-        RadioButtonGrid checkBox = new RadioButtonGrid(
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
                 Constants.STUDENT_INPUTS[0],
                 Constants.STUDENT_INPUTS[1],
                 Constants.STUDENT_INPUTS[2],
@@ -55,13 +55,12 @@ public class StudentWindow {
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-                }
-                /*searchResults.setItem(DataBaseManagement.getInstance().fetchWithCondition(getComparingColumn(getSelectedCheckBox()), newValue))*/
-        );
+            searchResults.setItem(DataBaseManagement.getInstance().fetchWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+        });
 
         HBox searchRow = new HBox();
         searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, checkBox.getRadioButtonGrid());
+        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
 
         VBox searchBar = new VBox(searchRow, new Separator());
         searchBar.setPadding(new Insets(10, 0, 0, 10));
@@ -70,7 +69,7 @@ public class StudentWindow {
 
     }
 
-    public void setWindowRight() {
+    private void setWindowRight() {
 
         ScrollPane scrollPane = new ScrollPane();
         VBox mainBox = new VBox(5);
@@ -105,7 +104,7 @@ public class StudentWindow {
         window.setRight(scrollPane);
     }
 
-    public void setWindowLeft() {
+    private void setWindowLeft() {
         ObservableList<String> collage = FXCollections.observableArrayList();
         collage.addAll("AAIT","CNCS","CBE","CDS","CEBS","CHS","CHLJC","CLGS","CSS","CVMA","CPVA");
 
@@ -145,7 +144,7 @@ public class StudentWindow {
         window.setLeft(vBox);
     }
 
-    public void setWindowCenter() {
+    private void setWindowCenter() {
         searchResults = new MyTableView<>(
                 new MyTableColumn("First Name", "firstName"),
                 new MyTableColumn("Last Name", "lastName"),

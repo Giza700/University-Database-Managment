@@ -4,12 +4,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+
 import java.util.ArrayList;
 
 
 public class RadioButtonGrid {
     private GridPane radioButtonGrid;
-    private ArrayList<RadioButton> radioButtons;
+    private RadioButton[] radioButtons;
 
     public GridPane getRadioButtonGrid() {
         return radioButtonGrid;
@@ -18,7 +19,7 @@ public class RadioButtonGrid {
     public RadioButtonGrid(String... name) {
         ToggleGroup toggleGroup = new ToggleGroup();
         radioButtonGrid = new GridPane();
-        radioButtons = new ArrayList<>();
+        radioButtons = new RadioButton[name.length];
         radioButtonGrid.setMaxHeight(50);
         radioButtonGrid.setVgap(5);
         radioButtonGrid.setHgap(5);
@@ -28,7 +29,7 @@ public class RadioButtonGrid {
             try {
                 int j = 0;
                 RadioButton radioButton = new RadioButton(name[i]);
-                radioButtons.add(radioButton);
+                radioButtons[i] = radioButton;
                 radioButton.getStyleClass().add("checkBox");
                 radioButton.getStylesheets().add("./ui/css/label.css");
                 radioButton.setToggleGroup(toggleGroup);
@@ -39,7 +40,7 @@ public class RadioButtonGrid {
                 j++;
 
                 RadioButton radioButton1 = new RadioButton(name[i + 1]);
-                radioButtons.add(radioButton1);
+                radioButtons[i + 1] = radioButton1;
                 radioButton1.getStyleClass().add("checkBox");
                 radioButton1.getStylesheets().add("./ui/css/label.css");
                 radioButton1.setToggleGroup(toggleGroup);
@@ -51,14 +52,14 @@ public class RadioButtonGrid {
 
             }
         }
-        radioButtons.get(0).setSelected(true);
+        radioButtons[0].setSelected(true);
     }
 
-    RadioButton getSelectedRadio() {
-        for (RadioButton radioButton : radioButtons) {
-            if (radioButton.isSelected()) return radioButton;
+    public int getSelectedRadio() {
+        for (int i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].isSelected()) return i;
         }
-        return null;
+        return 0;
     }
 
 }
