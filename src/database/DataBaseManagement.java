@@ -2,14 +2,16 @@ package database;
 
 import assistingclasses.Column;
 import assistingclasses.ColumnValue;
-import assistingclasses.Constants;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Account.Account;
 import models.Account.RegistrarAccount;
+import models.Account.SchoolAdminAccount;
+import models.Account.TeacherAccount;
+import models.Account.StudentAccount;
 import models.Sex;
 import models.*;
-import models.faculty.Teacher;
+import ui.pages.admin.Teacher;
 
 import java.sql.*;
 
@@ -56,7 +58,7 @@ public class DataBaseManagement {
         }
         query += " FROM " + tableName;
         if (!newValue.equals("")) {
-            query += " WHERE " + comparingColumn + " LIKE '" + newValue + "%'";
+            query += " WHERE " + comparingColumn + " LIKE '%" + newValue + "%'";
         }
         try {
             Statement statement = connection.createStatement();
@@ -77,7 +79,7 @@ public class DataBaseManagement {
                         resultSet.getString(3),
                         Sex.getSexObject(resultSet.getString(4)),
                         resultSet.getInt(5),
-                        Constants.getLocalDateFromString(resultSet.getString(6)),
+                        Student.getLocalDateFromString(resultSet.getString(6)),
                         resultSet.getInt(7),
                         resultSet.getString(8),
                         resultSet.getString(9),
@@ -92,35 +94,8 @@ public class DataBaseManagement {
             e.printStackTrace();
         }
         return null;
-    }
-    private ObservableList<Teacher> makeTeacherObservable(ResultSet resultSet) {
-        ObservableList<Teacher> teacherList = FXCollections.observableArrayList();
-        try {
-            while (resultSet.next()) {
-                Teacher teacher = new Teacher(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        Constants.getLocalDateFromString(resultSet.getString(4)),
-                        Sex.getSexObject(resultSet.getString(5)),
-                        resultSet.getInt(6),
-                        resultSet.getInt(7),
-                        resultSet.getString(8),
-                        resultSet.getString(9),
-                        resultSet.getString(10),
-                        resultSet.getInt(11),
-                        resultSet.getString(12),
-                        resultSet.getString(13)
-                );
-                teacherList.add(teacher);
-            }
-            return teacherList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
+    }
 
     private ObservableList<RegistrarAccount> makeRegistrarAccountObservable(ResultSet resultSet) {
         ObservableList<RegistrarAccount> accountList = FXCollections.observableArrayList();
@@ -142,28 +117,104 @@ public class DataBaseManagement {
         return null;
     }
 
-    public ObservableList<Student> fetchStudentWithCondition(String comparingColumn, String newValue) {
+    private ObservableList<SchoolAdminAccount> makeSchoolAdminAccountObservable(ResultSet resultSet) {
+        ObservableList<SchoolAdminAccount> accountList = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next()) {
+                SchoolAdminAccount schoolAdminAccount = new SchoolAdminAccount(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5)
+                );
+                accountList.add(schoolAdminAccount);
+            }
+            return accountList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private ObservableList<TeacherAccount> makeTeacherAccountObservable(ResultSet resultSet) {
+        ObservableList<TeacherAccount> accountList = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next()) {
+                TeacherAccount teacherAccount = new TeacherAccount(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5)
+                );
+                accountList.add(teacherAccount);
+            }
+            return accountList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private ObservableList<StudentAccount> makeStudentAccountObservable(ResultSet resultSet) {
+        ObservableList<StudentAccount> accountList = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next()) {
+                StudentAccount studentAccount = new StudentAccount(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5)
+                );
+                accountList.add(studentAccount);
+            }
+            return accountList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+
+
+    public ObservableList<Student> fetchWithCondition(String comparingColumn, String newValue) {
         ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
         return makeStudentObservable(resultSet);
     }
-    public ObservableList<Teacher> fetchTeacherWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("Teacher", comparingColumn, newValue, "*");
-        return makeTeacherObservable(resultSet);
-    }
+
 
     public ObservableList<Student> fetchColumnsFromStudent(String... columns) {
         ResultSet resultSet = fetchColumnsFromTable("Student", "", "", columns);
         return makeStudentObservable(resultSet);
-    }
-    public ObservableList<Teacher> fetchColumnsFromTeacher(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Teacher", "", "", columns);
-        return makeTeacherObservable(resultSet);
     }
 
     public ObservableList<RegistrarAccount> fetchColumnsFromRegistrarAccount(String... columns) {
         ResultSet resultSet = fetchColumnsFromTable("RegistrarAccount", "", "", columns);
         return makeRegistrarAccountObservable(resultSet);
     }
+
+    public ObservableList<SchoolAdminAccount> fetchColumnsFromSchoolAdminAccount(String... columns) {
+        ResultSet resultSet = fetchColumnsFromTable("SchoolAdminAccount", "", "", columns);
+        return makeSchoolAdminAccountObservable(resultSet);
+    }
+    public ObservableList<TeacherAccount> fetchColumnsFromTeacherAccount(String... columns) {
+        ResultSet resultSet = fetchColumnsFromTable("TeacherAccount", "", "", columns);
+        return makeTeacherAccountObservable(resultSet);
+    }
+
+    public ObservableList<StudentAccount> fetchColumnsFromStudentAccount(String... columns) {
+        ResultSet resultSet = fetchColumnsFromTable("StudentAccount", "", "", columns);
+        return makeStudentAccountObservable(resultSet);
+    }
+
+
+
+
 
     public ObservableList<Course> fetchColumnsFromCourse(String... columns) {
         ResultSet resultSet = fetchColumnsFromTable("Course", "", "", columns);
@@ -237,7 +288,7 @@ public class DataBaseManagement {
                 Dependants dependants = new Dependants(
                         resultSet.getString(1),
                         Sex.getSexObject(resultSet.getString(2)),
-                        Constants.getLocalDateFromString(resultSet.getString(3)),
+                        Student.getLocalDateFromString(resultSet.getString(3)),
                         resultSet.getString(4)
                 );
                 sectionList.add(dependants);
