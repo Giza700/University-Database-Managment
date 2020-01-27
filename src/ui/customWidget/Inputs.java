@@ -147,6 +147,12 @@ public class Inputs {
                 return "114568974";
             case "Rank":
                 return "Kebede";
+            case "Email":
+                return "Abebe123@gmail.com";
+            case "Username":
+                return "Abebe159";
+            case "Password":
+                return "Testing123";
             default:
                 return "";
         }

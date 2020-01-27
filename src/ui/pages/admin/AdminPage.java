@@ -25,6 +25,7 @@ public class AdminPage {
         Application adminPage = new Application() {
             @Override
             public void start(Stage primaryStage) throws Exception {
+                TextField search = new TextField();
                 RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
                         Constants.REGISTRAR_INPUTS[0],
                         Constants.REGISTRAR_INPUTS[1],
@@ -32,7 +33,7 @@ public class AdminPage {
                         Constants.REGISTRAR_INPUTS[3],
                         Constants.REGISTRAR_INPUTS[4]
                 );
-                TextField search = new TextField();
+
                 search.setMinWidth(400);
                 search.setPromptText("Name");
 

@@ -1,9 +1,13 @@
 package ui.customWidget;
 
+import database.DataBaseManagement;
 import javafx.geometry.Insets;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import models.Student;
+import ui.pages.customer.registrar.StudentWindow;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,10 @@ public class RadioButtonGrid {
                 radioButton.getStylesheets().add("./ui/css/label.css");
                 radioButton.setToggleGroup(toggleGroup);
                 radioButton.setId(name[i]);
+               /* radioButton.setOnAction(event -> {
+                    if (entityType == 1)
+                        DataBaseManagement.getInstance().fetchStudentWithCondition(StudentWindow.getComparingColumn(i), searchField.getText());
+                });*/
                 GridPane.setConstraints(radioButton, k, j);
                 radioButtonGrid.getChildren().add(radioButton);
 
@@ -45,6 +53,10 @@ public class RadioButtonGrid {
                 radioButton1.getStylesheets().add("./ui/css/label.css");
                 radioButton1.setToggleGroup(toggleGroup);
                 radioButton1.setId(name[i + 1]);
+              /*  radioButton1.setOnAction(event -> {
+                    if (entityType == 1)
+                        DataBaseManagement.getInstance().fetchStudentWithCondition("userName", searchField.getText());
+                });*/
                 GridPane.setConstraints(radioButton1, k, j);
                 radioButtonGrid.getChildren().add(radioButton1);
                 k++;

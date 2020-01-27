@@ -37,7 +37,9 @@ public class TeacherWindow {
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
+        TextField search = new TextField();
+
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(searchResults,2,search,
                 Constants.TEACHER_INPUTS[0],
                 Constants.TEACHER_INPUTS[1],
                 Constants.TEACHER_INPUTS[2],
@@ -52,7 +54,7 @@ public class TeacherWindow {
                 Constants.TEACHER_INPUTS[11],
                 Constants.TEACHER_INPUTS[12]
         );
-        TextField search = new TextField();
+
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {

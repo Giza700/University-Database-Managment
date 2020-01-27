@@ -46,7 +46,16 @@ public class RegistrarPage {
                     parentStage.show();
                 });
                 ButtonList buttonList = new ButtonList(studentSection, teachersSection, courseSection);
-                toolBar.getItems().addAll(imageView, buttonList.getHBox());
+                Pane spaceHolder = new Pane();
+                HBox.setHgrow(spaceHolder,Priority.ALWAYS);
+                Button changePassword = new Button("Change Password");
+                changePassword.setId("transparentButton");
+                changePassword.getStyleClass().add("./ui/css/label.css");
+                changePassword.setOnAction(event -> {
+                    new PasswordChangeDialog();
+                });
+
+                toolBar.getItems().addAll(imageView, buttonList.getHBox(),spaceHolder,changePassword);
 
                 Rectangle2D screen = Screen.getPrimary().getBounds();
                 Scene newScene = new Scene(window, screen.getWidth(), screen.getHeight());

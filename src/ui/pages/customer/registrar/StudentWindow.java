@@ -20,7 +20,7 @@ import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
 
 
-class StudentWindow {
+public class StudentWindow {
     private BorderPane window;
     private Inputs addNew;
     private Inputs editExisting;
@@ -38,6 +38,7 @@ class StudentWindow {
     private void setWindowTop(ToolBar toolBar) {
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
+        TextField search = new TextField();
 
         RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
                 Constants.STUDENT_INPUTS[0],
@@ -52,7 +53,7 @@ class StudentWindow {
                 Constants.STUDENT_INPUTS[9],
                 Constants.STUDENT_INPUTS[10]
         );
-        TextField search = new TextField();
+
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -183,7 +184,7 @@ class StudentWindow {
 
     }
 
-    private String getComparingColumn(int i) {
+    public static String getComparingColumn(int i) {
         if (i == 1) return "lastName";
         else if (i == 2) return "id";
         else if (i == 3) return "sex";
@@ -204,9 +205,9 @@ class StudentWindow {
             addNew.setMessage(Validation.validateId(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[2])));
         else if (Validation.validateYear(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[4]))) != null)
             addNew.setMessage(Validation.validateYear(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[4]))));
-        else if (Validation.validateDob(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[5]))!=null)
+        else if (Validation.validateDob(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[5])) != null)
             addNew.setMessage(Validation.validateDob(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[5])));
-        else if (Validation.validatePhone(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[6])))!=null)
+        else if (Validation.validatePhone(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[6]))) != null)
             addNew.setMessage(Validation.validatePhone(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[6]))));
         else {
             DataBaseManagement.getInstance().insertDataIntoTable("Student",
