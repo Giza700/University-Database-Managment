@@ -44,7 +44,7 @@ public class Inputs {
             TextField textField = new TextField();
             textField.getStyleClass().add("inputField");
             textField.getStylesheets().add("./ui/css/label.css");
-            textField.setPromptText(inputs[i]);
+            textField.setPromptText(getHintText(inputs[i]));
             textField.setId(inputs[i]);
             gridPane.getChildren().add(textField);
             GridPane.setConstraints(textField, j, i + 1);
@@ -106,7 +106,6 @@ public class Inputs {
                 break;
             }
         }
-
     }
 
     public void setMessage(String message) {
@@ -115,6 +114,41 @@ public class Inputs {
             if (node instanceof Label && node.getId().equals("messageLabel")) {
                 ((Label) node).setText(message);
             }
+        }
+    }
+
+    private String getHintText(String label) {
+        switch (label) {
+            case "First Name":
+                return "Abebe";
+            case "Last Name":
+                return "Kebede";
+            case "ID":
+                return "ATR/8523/09";
+            case "Sex":
+                return "Female";
+            case "DOB":
+                return "11/12/1998";
+            case "Year":
+                return "4";
+            case "Phone Number":
+                return "963524189";
+            case "City":
+                return "Addis Ababa";
+            case "SubCity":
+                return "N/S/L/S/C";
+            case "Street":
+                return "Menelik";
+            case "House No":
+                return "1989";
+            case "Salary":
+                return "1050";
+            case "Office Number":
+                return "114568974";
+            case "Rank":
+                return "Kebede";
+            default:
+                return "";
         }
     }
 }

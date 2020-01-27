@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Program;
 import models.Student;
+import ui.Validation;
 import ui.customWidget.RadioButtonGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
@@ -182,35 +183,7 @@ class StudentWindow {
 
     }
 
-   /* public Application getSearchPage() {
-        return searchPage;
-    }*/
-
-   /* public void setClickedCheckBox(CheckBox selectedCheckBox) {
-        for (CheckBox checkBox : checkBoxArray) {
-            if (checkBox == selectedCheckBox) continue;
-            checkBox.setSelected(false);
-        }
-    }
-
-    public void initializeCheckBox() {
-        for (CheckBox checkBox : checkBoxArray) {
-            checkBox.setOnMouseClicked(event -> {
-                setClickedCheckBox(checkBox);
-            });
-        }
-    }*/
-
-   /* public int getSelectedCheckBox() {
-        for (int i = 0; i < 7; i++) {
-            if (checkBoxArray[i].isSelected()) {
-                return i;
-            }
-        }
-        return 0;
-    }*/
-
-    public String getComparingColumn(int i) {
+    private String getComparingColumn(int i) {
         if (i == 1) return "lastName";
         else if (i == 2) return "id";
         else if (i == 3) return "sex";
@@ -224,20 +197,32 @@ class StudentWindow {
     }
 
     private void onSubmitButtonClicked() {
-
-        DataBaseManagement.getInstance().insertDataIntoTable("Student",
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0]), "firstName"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[1]), "lastName"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[2]), "id"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[3]), "sex"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[4]), "year"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[5]), "dataOfBirth"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[6]), "phoneNumber"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[7]), "city"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[8]), "subCity"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[9]), "street"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[10]), "houseNo")
-        );
+        if (Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0])) != null ||
+                Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[1])) != null) {
+            addNew.setMessage(Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0])));
+        } else if (Validation.validateId(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[2])) != null)
+            addNew.setMessage(Validation.validateId(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[2])));
+        else if (Validation.validateYear(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[4]))) != null)
+            addNew.setMessage(Validation.validateYear(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[4]))));
+        else if (Validation.validateDob(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[5]))!=null)
+            addNew.setMessage(Validation.validateDob(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[5])));
+        else if (Validation.validatePhone(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[6])))!=null)
+            addNew.setMessage(Validation.validatePhone(Integer.parseInt(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[6]))));
+        else {
+            DataBaseManagement.getInstance().insertDataIntoTable("Student",
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0]), "firstName"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[1]), "lastName"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[2]), "id"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[3]), "sex"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[4]), "year"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[5]), "dataOfBirth"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[6]), "phoneNumber"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[7]), "city"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[8]), "subCity"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[9]), "street"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[10]), "houseNo")
+            );
+        }
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
     }
 
