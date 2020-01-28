@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Account.SchoolAdminAccount;
+import ui.Validation;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
 import ui.customWidget.RadioButtonGrid;
@@ -47,7 +48,8 @@ public class SchoolAdmin {
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-                }
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchSchoolAdminAccountWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+        }
         );
 
         HBox searchRow = new HBox();
@@ -102,50 +104,58 @@ public class SchoolAdmin {
                 new MyTableColumn("User Name", "userName"),
                 new MyTableColumn("Password", "password")
         );
-        /*if ((addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[0]).isEmpty() ||
-                addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[1]).isEmpty() ||
-                addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[3]).isEmpty() ||
-                addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[4]).isEmpty())) {
-            addNew.setMessage("Please fill in all fields");
-        } else if (!Account.validateEmail(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[2]))) {
-            addNew.setMessage("Invalid Email");
-        } else if (!Account.validatePassword(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[4]))) {
-            addNew.setMessage("Invalid Password. Your password needs to be longer than 7 characters and contain at least one letter(upper and lowercase) and number");
-        } else {
-            addNew.setMessage("");
+        DataBaseManagement.getInstance().createTable("SchoolAdminAccount",
+                new Column("firstName", "String", 15),
+                new Column("lastName", "String", 15),
+                new Column("Email", "String", 15),
+                new Column("User Name", "String", 15),
+                new Column("Password", "String", 15)
+        );
+        try {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromSchoolAdminAccount("*"));
+        } catch (NullPointerException e) {
+            System.out.println("Empty SchoolAdminAccount List");
+        }
+        window.setCenter(searchResults.getTableView());
 
-            DataBaseManagement.getInstance().createTable("SchoolAdminAccount",
-                    new Column("firstName", "String", 15),
-                    new Column("lastName", "String", 15),
-                    new Column("email", "String", 15),
-                    new Column("username", "String", 15),
-                    new Column("password", "String", 15)
-            );
-            try {
-                searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromSchoolAdminAccount("*"));
-            } catch (NullPointerException e) {
-                System.out.println("Empty SchoolAdmin List");
-            }
-            window.setCenter(searchResults.getTableView());
 
-        }*/
+    }
+
+    public static String getComparingColumn(int i) {
+        if (i == 1) return "lastName";
+        else if (i == 2) return "User Name";
+        else if (i == 3) return "Password";
+        else return "firstName";
 
     }
 
 
+
+
     private void onSubmitButtonClicked() {
-        DataBaseManagement.getInstance().insertDataIntoTable("SchoolAdminAccount",
-                new ColumnValue(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[0]), "firstName"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[1]), "lastName"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[2]), "email"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[3]), "username"),
-                new ColumnValue(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[4]), "password")
-        );
+        if (Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])) != null ||
+                Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[1])) != null) {
+            addNew.setMessage(Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])));
+        } else if(Validation.validateuserName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3])) !=null ){
+            addNew.setMessage(Validation.validateuserName(addNew.getTextFieldValue((Constants.REGISTRAR_INPUTS[3]))));
+        }/*else if (Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4]) !=null)){
+            addNew.setMessage(Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4])));
+        }*/
+        else {
+            DataBaseManagement.getInstance().insertDataIntoTable("SchoolAdminAccount",
+                    new ColumnValue(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0]), "firstName"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[1]), "lastName"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[2]), "email"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3]), "username"),
+                    new ColumnValue(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4]), "password")
+            );
+        }
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromSchoolAdminAccount("*"));
 
 
 
     }
+
     private void onEditButtonClicked() {
         DataBaseManagement.getInstance().updateValueInTable("SchoolAdminAccount",
                 "username=\"" + userName + "\"",
@@ -158,6 +168,7 @@ public class SchoolAdmin {
         );
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromSchoolAdminAccount("*"));
     }
+
     private void onLoadButtonClicked() {
         ObservableList<SchoolAdminAccount> selected = searchResults.getSelectionModels().getSelectedItems();
         selected.forEach(SchoolAdminAccount -> {

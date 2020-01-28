@@ -147,6 +147,10 @@ public class DataBaseManagement {
         ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
         return makeStudentObservable(resultSet);
     }
+    public ObservableList<RegistrarAccount> fetchRegistrarAccountWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
+        return makeRegistrarAccountObservable(resultSet);
+    }
     private ObservableList<SchoolAdminAccount> makeSchoolAdminAccountObservable(ResultSet resultSet) {
         ObservableList<SchoolAdminAccount> accountList = FXCollections.observableArrayList();
         try {
@@ -215,10 +219,24 @@ public class DataBaseManagement {
     public ObservableList<Student> fetchWithCondition(String comparingColumn, String newValue) {
         ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
         return makeStudentObservable(resultSet);
+
     }
     public ObservableList<Teacher> fetchTeacherWithCondition(String comparingColumn, String newValue) {
         ResultSet resultSet = fetchColumnsFromTable("Teacher", comparingColumn, newValue, "*");
         return makeTeacherObservable(resultSet);
+    }
+    public ObservableList<SchoolAdminAccount> fetchSchoolAdminAccountWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTable("SchoolAdminAccount", comparingColumn, newValue, "*");
+        return makeSchoolAdminAccountObservable(resultSet);
+    }
+    public ObservableList<TeacherAccount> fetchTeacherAccountWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTable("TeacherAccount", comparingColumn, newValue, "*");
+        return makeTeacherAccountObservable(resultSet);
+    }
+
+    public ObservableList<StudentAccount> fetchStudentAccounttWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
+        return makeStudentAccountObservable(resultSet);
     }
 
     public ObservableList<Student> fetchColumnsFromStudent(String... columns) {
@@ -462,5 +480,6 @@ public class DataBaseManagement {
             e.printStackTrace();
         }
     }
+
 
 }

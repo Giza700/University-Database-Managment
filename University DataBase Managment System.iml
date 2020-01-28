@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Java/Project/LibraryManagment/sqlite-jdbc-3.27.2.1.jar!/" />
+          <root url="jar://D:/Java/Project/LibraryManagment/sqlite-jdbc-3.27.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,11 +19,22 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Java/Project/LibraryManagment/sqlite-jdbc-3.27.2.1.jar!/" />
+          <root url="jar://D:/Java/Project/LibraryManagment/sqlite-jdbc-3.27.2.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Java/sqlite-jdbc-3.27.2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="jdk1.8" level="project" />
+    <orderEntry type="library" name="jre1.8" level="project" />
   </component>
 </module>
