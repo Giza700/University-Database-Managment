@@ -1,5 +1,9 @@
 package assistingclasses;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import models.Program;
+
 import java.time.LocalDate;
 
 public class Constants {
@@ -67,6 +71,31 @@ public class Constants {
             System.out.println("Index out of Bound in Student getLocalDateFromString method");
         }
         return null;
+    }
+    //TODO replace with data from database
+
+    public static ObservableList<String> getDepartmentsOfCollege(String college){
+        if (college.equals("AAIT")) return FXCollections.observableArrayList("SECE", "SCEE", "SMIE");
+        else if (college.equals("CNCS")) return FXCollections.observableArrayList("Phy","Chem","Bio");
+        else return FXCollections.observableArrayList();
+    }
+    public static ObservableList<Program> getProgramOfDepartment(String department){
+        if (department.equals("SECE")) return FXCollections.observableArrayList(Program.Under_Grad);
+        else if (department.equals("SMIE")) return FXCollections.observableArrayList(Program.Under_Grad,Program.Grad);
+        else if (department.equals("SCEE"))return FXCollections.observableArrayList(Program.Under_Grad,Program.Grad,Program.Post_Grad);
+        else return FXCollections.observableArrayList();
+    }
+    public static ObservableList<Integer> getYearsOfProgram(Program program){
+        if (program ==Program.Under_Grad) return FXCollections.observableArrayList(1,2,3,4,5);
+        else return FXCollections.observableArrayList(1,2);
+    }
+    public static ObservableList<String> getSectionOfYear(int year){
+        if (year == 1) return FXCollections.observableArrayList("A","B","C","D");
+        else if (year == 2)return FXCollections.observableArrayList("A","B","C");
+        else if (year == 3)return FXCollections.observableArrayList("A","B","C");
+        else if (year == 4)return FXCollections.observableArrayList("A","B");
+        else if (year == 5)return FXCollections.observableArrayList("A");
+            else return FXCollections.observableArrayList();
     }
 }
 

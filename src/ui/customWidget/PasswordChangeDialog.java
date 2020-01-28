@@ -2,14 +2,11 @@ package ui.customWidget;
 
 import assistingclasses.ColumnValue;
 import database.DataBaseManagement;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import javafx.util.Pair;
-import models.Account.RegistrarAccount;
-import ui.pages.customer.registrar.RegistrarPage;
+
 
 public class PasswordChangeDialog {
     private Dialog<Pair<String, String>> loginDialog;
