@@ -49,4 +49,17 @@ public class Validation {
         if (characters[3] == '/' && characters[8] == '/') return false;// TODO Add more conditions
         else return true;
     }
+    public static String validateuserName(String userName) {
+        if (userName.equals("")) return "User Name filed can't be empty";
+        else if (userName.contains("/"))
+            return "User Name  can't contain special character";// TODO Add a method for all special characters
+        else return null;
+    }
+
+    public static String validatePassword(String password) {
+        if (password.equals("")) return "password filed can't be empty";
+        else if (password.contains("/"))
+            return "Password can't contain special character";// TODO Add a method for all special characters
+        else return null;
+    }
 }

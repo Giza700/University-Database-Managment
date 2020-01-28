@@ -33,7 +33,7 @@ public class MainPage extends Application {
         Label openAdmin = new Label("Admin");
         openAdmin.getStylesheets().add("ui/css/label.css");
         openAdmin.setOnMouseClicked(event -> {
-            new AdminPage();
+            new AdminPage(primaryStage);
             primaryStage.close();
         });
 
