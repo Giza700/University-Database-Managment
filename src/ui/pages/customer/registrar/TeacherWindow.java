@@ -39,7 +39,7 @@ public class TeacherWindow {
 
         TextField search = new TextField();
 
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(searchResults,2,search,
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
                 Constants.TEACHER_INPUTS[0],
                 Constants.TEACHER_INPUTS[1],
                 Constants.TEACHER_INPUTS[2],

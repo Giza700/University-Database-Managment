@@ -12,11 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import models.Account.Account;
 import models.Account.SchoolAdminAccount;
-import ui.customWidget.CheckBoxGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
+import ui.customWidget.RadioButtonGrid;
 
 public class SchoolAdmin {
     private BorderPane window;
@@ -37,7 +36,7 @@ public class SchoolAdmin {
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
-        CheckBoxGrid checkBox = new CheckBoxGrid(
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
                 Constants.SCHOOLADMIN_INPUTS[0],
                 Constants.SCHOOLADMIN_INPUTS[1],
                 Constants.SCHOOLADMIN_INPUTS[2],
@@ -53,7 +52,7 @@ public class SchoolAdmin {
 
         HBox searchRow = new HBox();
         searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, checkBox.getCheckBoxGrid());
+        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
 
         VBox searchBar = new VBox(searchRow, new Separator());
         searchBar.setPadding(new Insets(10, 0, 0, 10));

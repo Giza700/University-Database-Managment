@@ -14,7 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Account.Account;
 import models.Account.RegistrarAccount;
-import ui.customWidget.CheckBoxGrid;
+import ui.customWidget.RadioButtonGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
 
@@ -38,7 +38,7 @@ public class Registrar {
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
-        CheckBoxGrid checkBox = new CheckBoxGrid(
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
                 Constants.REGISTRAR_INPUTS[0],
                 Constants.REGISTRAR_INPUTS[1],
                 Constants.REGISTRAR_INPUTS[2],
@@ -55,7 +55,7 @@ public class Registrar {
 
         HBox searchRow = new HBox();
         searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, checkBox.getCheckBoxGrid());
+        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
 
         VBox searchBar = new VBox(searchRow, new Separator());
         searchBar.setPadding(new Insets(10, 0, 0, 10));
