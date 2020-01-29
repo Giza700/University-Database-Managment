@@ -74,9 +74,9 @@ public class StudentWindow {
 
         ScrollPane scrollPane = new ScrollPane();
         VBox mainBox = new VBox(5);
-        addNew = new Inputs("Add new student", "Submit", event -> onSubmitButtonClicked(), Constants.STUDENT_INPUTS
+        addNew = new Inputs("Add new student", "Submit", event -> onSubmitButtonClicked(), 1,Constants.STUDENT_INPUTS
         );
-        editExisting = new Inputs("Edit student information", "Edit", event -> onEditButtonClicked(), Constants.STUDENT_INPUTS);
+        editExisting = new Inputs("Edit student information", "Edit", event -> onEditButtonClicked(), 1,Constants.STUDENT_INPUTS);
 
         VBox deleteAccount = new VBox(5);
         deleteAccount.setPadding(new Insets(10));

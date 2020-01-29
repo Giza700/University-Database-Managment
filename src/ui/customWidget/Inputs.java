@@ -16,7 +16,93 @@ public class Inputs {
     public Inputs(String sectionWork,
                   String buttonLabel,
                   EventHandler<ActionEvent> onSubmitClicked,
+                  int x,
                   String... inputs) {
+        setUpTextFields(sectionWork, inputs);
+        setUpActionsAndCombo(buttonLabel, onSubmitClicked, inputs.length);
+    }
+
+    public Inputs(String sectionWork,
+                  String buttonLabel,
+                  EventHandler<ActionEvent> onSubmitClicked,
+                  String... inputs) {
+        setUpTextFields(sectionWork, inputs);
+        setUpActionButtons(buttonLabel, onSubmitClicked, inputs.length);
+
+    }
+
+    private void setUpActionButtons(String buttonLabel, EventHandler<ActionEvent> onSubmitClicked, int length) {
+        Button submitButton = new Button(buttonLabel);
+        submitButton.setId("submitButton");
+        submitButton.getStylesheets().add("./ui/css/label.css");
+        submitButton.setOnAction(onSubmitClicked);
+        submitButton.setAlignment(Pos.BASELINE_RIGHT);
+
+        Button clearButton = new Button("Clear");
+        clearButton.setId("clearButton");
+        clearButton.getStylesheets().add("./ui/css/label.css");
+        clearButton.setOnAction(event -> {
+            clearFields();
+        });
+
+        HBox hBox = new HBox(5, clearButton, submitButton);
+
+        gridPane.getChildren().add(hBox);
+        GridPane.setConstraints(hBox, 1, length + 1, 2, 1);
+        GridPane.setHalignment(hBox, HPos.RIGHT);
+
+        Label messageLabel = new Label();
+        messageLabel.setId("messageLabel");
+        messageLabel.setWrapText(true);
+        messageLabel.getStylesheets().add("./ui/css/label.css");
+
+        gridPane.getChildren().add(messageLabel);
+        GridPane.setConstraints(messageLabel, 0, length + 2, 2, 1);
+    }
+
+    private void clearFields() {
+        ObservableList<Node> list = gridPane.getChildren();
+        for (Node node : list) {
+            if (node instanceof TextField) {
+                ((TextField) node).setText("");
+            }
+        }
+    }
+
+    private void setUpActionsAndCombo(String buttonLabel, EventHandler<ActionEvent> onSubmitClicked, int length) {
+        Button submitButton = new Button(buttonLabel);
+        submitButton.setId("submitButton");
+        submitButton.getStylesheets().add("./ui/css/label.css");
+        submitButton.setOnAction(onSubmitClicked);
+        submitButton.setAlignment(Pos.BASELINE_RIGHT);
+
+        Button clearButton = new Button("Clear");
+        clearButton.setId("clearButton");
+        clearButton.getStylesheets().add("./ui/css/label.css");
+        clearButton.setOnAction(event -> {
+            clearFields();
+        });
+        ComboBox<String> colleges = new ComboBox<>();
+        ComboBox<String> department = new ComboBox<>();
+
+        HBox hBox = new HBox(5, clearButton, submitButton);
+
+
+        GridPane.setConstraints(colleges, 1, length + 1, 2, 1);
+        GridPane.setConstraints(department, 1, length + 2, 2, 1);
+
+        Label messageLabel = new Label();
+        messageLabel.setId("messageLabel");
+        messageLabel.setWrapText(true);
+        messageLabel.getStylesheets().add("./ui/css/label.css");
+
+        GridPane.setConstraints(hBox, 0, length + 3, 2, 1);
+        GridPane.setHalignment(hBox, HPos.RIGHT);
+        GridPane.setConstraints(messageLabel, 0, length + 4, 2, 1);
+        gridPane.getChildren().addAll(colleges, department, hBox, messageLabel);
+    }
+
+    private void setUpTextFields(String sectionWork, String... inputs) {
         gridPane = new GridPane();
         gridPane.getStyleClass().add("mainBlack");
         gridPane.getStylesheets().add("./ui/css/label.css");
@@ -49,40 +135,7 @@ public class Inputs {
             gridPane.getChildren().add(textField);
             GridPane.setConstraints(textField, j, i + 1);
         }
-
-        Button submitButton = new Button(buttonLabel);
-        submitButton.setId("submitButton");
-        submitButton.getStylesheets().add("./ui/css/label.css");
-        submitButton.setOnAction(onSubmitClicked);
-        submitButton.setAlignment(Pos.BASELINE_RIGHT);
-
-        Button clearButton = new Button("Clear");
-        clearButton.setId("clearButton");
-        clearButton.getStylesheets().add("./ui/css/label.css");
-        clearButton.setOnAction(event -> {
-            ObservableList<Node> list = gridPane.getChildren();
-            for (Node node : list) {
-                if (node instanceof TextField) {
-                    ((TextField) node).setText("");
-                }
-            }
-        });
-
-        HBox hBox = new HBox(5, clearButton, submitButton);
-
-        gridPane.getChildren().add(hBox);
-        GridPane.setConstraints(hBox, 1, inputs.length + 1, 2, 1);
-        GridPane.setHalignment(hBox, HPos.RIGHT);
-
-        Label messageLabel = new Label();
-        messageLabel.setId("messageLabel");
-        messageLabel.setWrapText(true);
-        messageLabel.getStylesheets().add("./ui/css/label.css");
-
-        gridPane.getChildren().add(messageLabel);
-        GridPane.setConstraints(messageLabel, 0, inputs.length + 2, 2, 1);
     }
-
 
     public GridPane getGridPane() {
         return gridPane;
