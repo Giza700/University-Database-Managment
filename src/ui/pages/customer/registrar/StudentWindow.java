@@ -14,10 +14,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Student;
 import ui.Validation;
-import ui.customWidget.ComboList;
-import ui.customWidget.RadioButtonGrid;
-import ui.customWidget.Inputs;
-import ui.customWidget.MyTableView;
+import ui.customWidget.*;
+
+import javax.naming.directory.SearchResult;
 
 
 public class StudentWindow {
@@ -108,6 +107,26 @@ public class StudentWindow {
 
     private void setWindowLeft() {
         ComboList comboList = new ComboList();
+        comboList.setUPComboList((observable, oldValue, newValue) -> {
+                    comboList.getDepartments().setItems(Constants.getDepartmentsOfCollege(newValue));
+                    comboList.getDepartments().setDisable(false);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition("collegeId",newValue));
+                },
+                (observable, oldValue, newValue) -> {
+                    comboList.getPrograms().setItems(Constants.getProgramOfDepartment(newValue));
+                    comboList.getPrograms().setDisable(false);
+                },
+                (observable, oldValue, newValue) -> {
+                    comboList.getYears().setItems(Constants.getYearsOfProgram(newValue));
+                    comboList.getYears().setDisable(false);
+                },
+                (observable, oldValue, newValue) -> {
+                    comboList.getSections().setItems(Constants.getSectionOfYear(newValue));
+                    comboList.getSections().setDisable(false);
+                },
+                (observable, oldValue, newValue) -> {
+
+                });
         window.setLeft(comboList.getComboList());
     }
 
@@ -137,16 +156,17 @@ public class StudentWindow {
                 new Column("city", "String", 10),
                 new Column("subCity", "String", 10),
                 new Column("street", "String", 10),
-                new Column("houseNo", "Int", 10)
+                new Column("houseNo", "Int", 10),
+                new Column("collegeId", "String", 15),
+                new Column("departmentId", "String", 15)
         );
 
         try {
             searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
         } catch (NullPointerException e) {
-            System.out.println("Empty StudentWindow List");
+            searchResults.setItem(null);
         }
         window.setCenter(searchResults.getTableView());
-
     }
 
     public static String getComparingColumn(int i) {

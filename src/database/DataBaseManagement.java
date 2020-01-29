@@ -85,8 +85,9 @@ public class DataBaseManagement {
                         resultSet.getString(8),
                         resultSet.getString(9),
                         resultSet.getString(10),
-                        resultSet.getInt(11)
-                        /*resultSet.getString(12)*/
+                        resultSet.getInt(11),
+                        resultSet.getString(12),
+                        resultSet.getString(13)
                 );
                 studentList.add(student);
             }

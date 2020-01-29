@@ -15,9 +15,10 @@ public class Student {
     private String street;
     private String subCity;
     private String city;
+    private String collegeId;
     private String departmentId;
 
-    public Student(
+    public Student(//TODO overload constructor if this isn't used by the filters
             String firstName,
             String lastName,
             String id,
@@ -28,9 +29,9 @@ public class Student {
             String city,
             String subCity,
             String street,
-            int houseNo
-
-            /*String departmentId*/) {
+            int houseNo,
+            String collegeId,
+            String departmentId) {
 
         this.id = id;
         this.firstName = firstName;
@@ -43,7 +44,8 @@ public class Student {
         this.street = street;
         this.subCity = subCity;
         this.city = city;
-        /*     this.departmentId = departmentId;*/
+        this.collegeId = collegeId;
+        this.departmentId = departmentId;
     }
 
     public String getId() {
@@ -141,6 +143,14 @@ public class Student {
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
+    public String getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(String collegeId) {
+        this.collegeId = collegeId;
+    }
+
 
 
 }

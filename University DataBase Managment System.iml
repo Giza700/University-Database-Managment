@@ -16,7 +16,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://D:/Java/Project/LibraryManagment/sqlite-jdbc-3.27.2.1.jar!/" />
@@ -36,5 +36,14 @@
     </orderEntry>
     <orderEntry type="library" name="jdk1.8" level="project" />
     <orderEntry type="library" name="jre1.8" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../sqlite-jdbc-3.27.2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

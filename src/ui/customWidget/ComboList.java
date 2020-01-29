@@ -1,6 +1,6 @@
 package ui.customWidget;
 
-import assistingclasses.Constants;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -8,10 +8,21 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import models.Program;
 
+
 public class ComboList {
     private VBox vBox;
+    private ComboBox<String> collages;
+    private ComboBox<String> departments;
+    private ComboBox<Program> programs;
+    private ComboBox<Integer> years;
+    private ComboBox<String> sections;
 
-    public ComboList() {
+    public void setUPComboList(ChangeListener<String> onCollegeSelected,
+                     ChangeListener<String> onDepartmentSelected,
+                     ChangeListener<Program> onProgramSelected,
+                     ChangeListener<Integer> onYearSelected,
+                     ChangeListener<String> onSectionSelected
+    ) {
 
         ObservableList<String> collage = FXCollections.observableArrayList();
         collage.addAll("AAIT", "CNCS", "CBE", "CDS", "CEBS", "CHS", "CHLJC", "CLGS", "CSS", "CVMA", "CPVA");
@@ -32,32 +43,19 @@ public class ComboList {
         vBox.setPadding(new Insets(10));
         vBox.setMinWidth(100);
 
-        ComboBox<String> collages = new ComboBox<>(collage);
-        ComboBox<String> departments = new ComboBox<>();
-        ComboBox<Program> programs = new ComboBox<>();
-        ComboBox<Integer> years = new ComboBox<>();
-        ComboBox<String> sections = new ComboBox<>();
+        collages = new ComboBox<>(collage);
+        departments = new ComboBox<>();
+        programs = new ComboBox<>();
+        years = new ComboBox<>();
+        sections = new ComboBox<>();
+
         collages.setPromptText("Collage");
 
-        collages.valueProperty().addListener((observable, oldValue, newValue) -> {
-            departments.setItems(Constants.getDepartmentsOfCollege(newValue));
-            departments.setDisable(false);
-        });
-        departments.valueProperty().addListener((observable, oldValue, newValue) -> {
-            programs.setItems(Constants.getProgramOfDepartment(newValue));
-            programs.setDisable(false);
-        });
-        programs.valueProperty().addListener((observable, oldValue, newValue) -> {
-            years.setItems(Constants.getYearsOfProgram(newValue));
-            years.setDisable(false);
-        });
-        years.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sections.setItems(Constants.getSectionOfYear(newValue));
-            sections.setDisable(false);
-        });
-        sections.valueProperty().addListener((observable, oldValue, newValue) -> {
-
-        });
+        collages.valueProperty().addListener(onCollegeSelected);
+        departments.valueProperty().addListener(onDepartmentSelected);
+        programs.valueProperty().addListener(onProgramSelected);
+        years.valueProperty().addListener(onYearSelected);
+        sections.valueProperty().addListener(onSectionSelected);
 
         departments.setPromptText("Department");
         departments.setDisable(true);
@@ -73,6 +71,26 @@ public class ComboList {
 
     public VBox getComboList() {
         return vBox;
+    }
+
+    public ComboBox<String> getCollages() {
+        return collages;
+    }
+
+    public ComboBox<String> getDepartments() {
+        return departments;
+    }
+
+    public ComboBox<Program> getPrograms() {
+        return programs;
+    }
+
+    public ComboBox<Integer> getYears() {
+        return years;
+    }
+
+    public ComboBox<String> getSections() {
+        return sections;
     }
 
 }
