@@ -40,7 +40,7 @@ public class Validation {
     }
 
     public static String validatePhone(int phone) {
-        if (phone / 1000000000 > 1 || phone / 1000000000 < 0.9) return "Invalid phone Number";
+        if (phone / 1000000000 > 1 /*|| phone / 1000000000 < 0.9*/) return "Invalid phone Number";
         else return null;
     }
 

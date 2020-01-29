@@ -1,5 +1,6 @@
 package ui.customWidget;
 
+import assistingclasses.Constants;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +26,7 @@ public class ComboList {
     ) {
 
         ObservableList<String> collage = FXCollections.observableArrayList();
-        collage.addAll("AAIT", "CNCS", "CBE", "CDS", "CEBS", "CHS", "CHLJC", "CLGS", "CSS", "CVMA", "CPVA");
+        collage.addAll(Constants.colleges);
 
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");

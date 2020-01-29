@@ -74,9 +74,24 @@ public class StudentWindow {
 
         ScrollPane scrollPane = new ScrollPane();
         VBox mainBox = new VBox(5);
-        addNew = new Inputs("Add new student", "Submit", event -> onSubmitButtonClicked(), 1,Constants.STUDENT_INPUTS
+        addNew = new Inputs("Add new student",
+                event -> onSubmitButtonClicked(),
+                "Submit",
+                Constants.STUDENT_INPUTS
         );
-        editExisting = new Inputs("Edit student information", "Edit", event -> onEditButtonClicked(), 1,Constants.STUDENT_INPUTS);
+        addNew.getColleges().valueProperty().addListener((observable, oldValue, newValue) -> {
+            addNew.getDepartment().setItems(FXCollections.observableArrayList(Constants.getDepartmentsOfCollege(newValue)));
+            addNew.getDepartment().setDisable(false);
+        });
+
+        editExisting = new Inputs("Edit student information",
+                event -> onEditButtonClicked(),
+                "Edit",
+                Constants.STUDENT_INPUTS);
+
+        editExisting.getColleges().valueProperty().addListener((observable, oldValue, newValue) -> {
+            editExisting.getDepartment().setItems(Constants.getDepartmentsOfCollege(editExisting.getColleges().getValue()));
+        });
 
         VBox deleteAccount = new VBox(5);
         deleteAccount.setPadding(new Insets(10));
@@ -110,7 +125,7 @@ public class StudentWindow {
         comboList.setUPComboList((observable, oldValue, newValue) -> {
                     comboList.getDepartments().setItems(Constants.getDepartmentsOfCollege(newValue));
                     comboList.getDepartments().setDisable(false);
-                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition("collegeId",newValue));
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition("collegeId", newValue));
                 },
                 (observable, oldValue, newValue) -> {
                     comboList.getPrograms().setItems(Constants.getProgramOfDepartment(newValue));
@@ -183,6 +198,7 @@ public class StudentWindow {
     }
 
     private void onSubmitButtonClicked() {
+        //TODO check if combo box values have been selected
         if (Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0])) != null ||
                 Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[1])) != null) {
             addNew.setMessage(Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0])));
@@ -206,7 +222,9 @@ public class StudentWindow {
                     new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[7]), "city"),
                     new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[8]), "subCity"),
                     new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[9]), "street"),
-                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[10]), "houseNo")
+                    new ColumnValue(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[10]), "houseNo"),
+                    new ColumnValue(addNew.getColleges().getValue(), "collegeId"),
+                    new ColumnValue(addNew.getDepartment().getValue(), "departmentId")
             );
         }
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
@@ -225,7 +243,9 @@ public class StudentWindow {
                 new ColumnValue<>(editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[7]), "city"),
                 new ColumnValue<>(editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[8]), "subCity"),
                 new ColumnValue<>(editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[9]), "street"),
-                new ColumnValue<>(editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[10]), "houseNo")
+                new ColumnValue<>(editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[10]), "houseNo"),
+                new ColumnValue<>(editExisting.getColleges().getValue(), "collegeId"),
+                new ColumnValue<>(editExisting.getDepartment().getValue(), "departmentId")
 
         );
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
@@ -246,6 +266,10 @@ public class StudentWindow {
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[8], student.getSubCity());
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[9], student.getStreet());
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[10], Integer.toString(student.getHouseNo()));
+            editExisting.getColleges().setValue(student.getCollegeId());
+            editExisting.getDepartment().setValue(student.getDepartmentId());
+            editExisting.getDepartment().setDisable(false);
+            editExisting.getDepartment().setItems(Constants.getDepartmentsOfCollege(student.getCollegeId()));
             id = editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[2]);
         });
     }

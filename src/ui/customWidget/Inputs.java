@@ -1,5 +1,8 @@
 package ui.customWidget;
 
+import assistingclasses.Constants;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.geometry.HPos;
@@ -12,15 +15,18 @@ import javafx.scene.layout.*;
 public class Inputs {
 
     private GridPane gridPane;
+    private ComboBox<String> department;
+    private ComboBox<String> colleges;
 
     public Inputs(String sectionWork,
-                  String buttonLabel,
                   EventHandler<ActionEvent> onSubmitClicked,
-                  int x,
+                  String buttonLabel,
                   String... inputs) {
         setUpTextFields(sectionWork, inputs);
         setUpActionsAndCombo(buttonLabel, onSubmitClicked, inputs.length);
     }
+
+    //Notice that the order of inputs is how the constructors are overloaded
 
     public Inputs(String sectionWork,
                   String buttonLabel,
@@ -69,7 +75,9 @@ public class Inputs {
         }
     }
 
-    private void setUpActionsAndCombo(String buttonLabel, EventHandler<ActionEvent> onSubmitClicked, int length) {
+    private void setUpActionsAndCombo(String buttonLabel,
+                                      EventHandler<ActionEvent> onSubmitClicked,
+                                      int length) {
         Button submitButton = new Button(buttonLabel);
         submitButton.setId("submitButton");
         submitButton.getStylesheets().add("./ui/css/label.css");
@@ -81,13 +89,22 @@ public class Inputs {
         clearButton.getStylesheets().add("./ui/css/label.css");
         clearButton.setOnAction(event -> {
             clearFields();
+            colleges.setValue(null);
+            department.setValue(null);
+            department.setDisable(true);
         });
-        ComboBox<String> colleges = new ComboBox<>();
-        ComboBox<String> department = new ComboBox<>();
+
+        colleges = new ComboBox<>();
+        colleges.setItems(FXCollections.observableArrayList(Constants.colleges));
+        colleges.setPromptText("College");
+
+
+        department = new ComboBox<>();
+        department.setPromptText("department");
+        department.setDisable(true);
+
 
         HBox hBox = new HBox(5, clearButton, submitButton);
-
-
         GridPane.setConstraints(colleges, 1, length + 1, 2, 1);
         GridPane.setConstraints(department, 1, length + 2, 2, 1);
 
@@ -210,5 +227,14 @@ public class Inputs {
                 return "";
         }
     }
+
+    public ComboBox<String> getDepartment() {
+        return department;
+    }
+
+    public ComboBox<String> getColleges() {
+        return colleges;
+    }
+
 }
 
