@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import ui.pages.Student.StudentPage;
 import ui.pages.admin.AdminPage;
 import ui.pages.customer.registrar.RegistrarPage;
 
@@ -33,8 +34,14 @@ public class MainPage extends Application {
         Label openAdmin = new Label("Admin");
         openAdmin.getStylesheets().add("ui/css/label.css");
         openAdmin.setOnMouseClicked(event -> {
-            new AdminPage(primaryStage);
+            /*new LogIn();*/
             primaryStage.close();
+        });
+        Label openStudent = new Label("Student");
+        openStudent.getStylesheets().add("ui/css/label.css");
+        openStudent.setOnMouseClicked(event -> {
+                    new StudentPage(primaryStage);
+                    primaryStage.close();
         });
 
         Rectangle2D screen = Screen.getPrimary().getBounds();
@@ -45,7 +52,7 @@ public class MainPage extends Application {
         ImageView imageView3 = new ImageView(getClass().getResource("/assets/AAU-Header_2.jpg").toExternalForm());
         /*imageView.setFitWidth(screen.getWidth());
         imageView.setFitHeight(screen.getHeight()-50);*/
-        toolBar.getItems().addAll(openAdmin, openRegistrar);
+        toolBar.getItems().addAll(openAdmin, openRegistrar,openStudent);
 
         VBox vBox = new VBox(5,toolBar, imageView3);
         borderPane.setTop(vBox);

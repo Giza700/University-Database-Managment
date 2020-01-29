@@ -482,12 +482,16 @@ public class DataBaseManagement {
         }
     }
     public void getDepartments() {
-        String query  = "SELECT * FROM department JOIN coll_dep ON coll_dep.coll_id = c_id JOIN department ON coll_dep.dep_id = d_id WHERE c_id = 'AAIT' ";
+        String query  = "SELECT * FROM department " +
+                "JOIN coll_dep ON department.d_id = coll_dep.dep_id " +
+                "JOIN college ON coll_dep.coll_id = college.c_id " +
+                "WHERE college.c_id = 'AAIT'";
 
-        try (Statement statement  = connection.createStatement()){
-            ResultSet resultSet = statement.executeQuery(query);
+        try (Statement statement  = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)){
+
             while (resultSet.next()) {
-                System.out.println(resultSet.getString(0));
+                System.out.println(resultSet.getString(2));
             }
         } catch (SQLException e) {
             e.printStackTrace();
