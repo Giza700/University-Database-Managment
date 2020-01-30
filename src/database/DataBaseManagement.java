@@ -69,6 +69,7 @@ public class DataBaseManagement {
             return null;
         }
     }
+
     private ResultSet fetchColumnsFromTableNew(String tableName, String condition, String... columns) {
         String query = "SELECT ";
         boolean isFirst = true;
@@ -109,7 +110,8 @@ public class DataBaseManagement {
                         resultSet.getString(10),
                         resultSet.getInt(11),
                         resultSet.getString(12),
-                        resultSet.getString(13)
+                        resultSet.getString(13),
+                        resultSet.getString(14)
                 );
                 studentList.add(student);
             }
@@ -168,13 +170,55 @@ public class DataBaseManagement {
         return null;
     }
 
-    public ObservableList<Student> fetchStudentWithCondition(String comparingColumnOrCondition, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTableOld("Student", comparingColumnOrCondition, newValue, "*");
+    private ObservableList<String> makeObservableString(ResultSet resultSet) {
+        ObservableList<String> departmentList = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next()) {
+                departmentList.add(resultSet.getString(1));
+            }
+            return departmentList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ObservableList<Student> fetchStudentWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTableOld("Student", comparingColumn, newValue, "*");
         return makeStudentObservable(resultSet);
     }
+
     public ObservableList<Student> fetchStudentWithCondition(String condition) {
         ResultSet resultSet = fetchColumnsFromTableNew("Student", condition, "*");
         return makeStudentObservable(resultSet);
+    }
+
+    public ObservableList<String> fetchDepartmentWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTableOld("Department", comparingColumn, newValue, "departmentId");
+        return makeObservableString(resultSet);
+    }
+
+    public ObservableList<Integer> fetchYearsOfProgram(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTableOld("Program", comparingColumn, newValue, "years");
+        int years;
+        try {
+            if (resultSet != null) {
+                ObservableList<Integer> yearList = FXCollections.observableArrayList();
+                years = resultSet.getInt(1);
+                for (int i = 1; i <= years; i++) {
+                    yearList.add(i);
+                }
+                return yearList;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ObservableList<String> fetchProgramWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTableOld("Program", comparingColumn, newValue, "programId");
+        return makeObservableString(resultSet);
     }
 
     public ObservableList<RegistrarAccount> fetchRegistrarAccountWithCondition(String comparingColumn, String newValue) {
@@ -264,7 +308,7 @@ public class DataBaseManagement {
         return makeTeacherAccountObservable(resultSet);
     }
 
-    public ObservableList<StudentAccount> fetchStudentAccounttWithCondition(String comparingColumn, String newValue) {
+    public ObservableList<StudentAccount> fetchStudentAccountWithCondition(String comparingColumn, String newValue) {
         ResultSet resultSet = fetchColumnsFromTableOld("Student", comparingColumn, newValue, "*");
         return makeStudentAccountObservable(resultSet);
     }
@@ -329,11 +373,8 @@ public class DataBaseManagement {
                         resultSet.getString(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
-                        resultSet.getInt(4)
-                        /*resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getArray(7)*/
-                );
+                        resultSet.getInt(4),
+                        resultSet.getString(5));
                 departmentList.add(department);
             }
             return departmentList;

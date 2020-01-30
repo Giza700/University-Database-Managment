@@ -4,41 +4,34 @@ import assistingclasses.Constants;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import models.Program;
+
 
 
 public class ComboList {
     private VBox vBox;
     private ComboBox<String> collages;
     private ComboBox<String> departments;
-    private ComboBox<Program> programs;
+    private ComboBox<String> programs;
     private ComboBox<Integer> years;
     private ComboBox<String> sections;
 
     public void setUPComboList(ChangeListener<String> onCollegeSelected,
-                     ChangeListener<String> onDepartmentSelected,
-                     ChangeListener<Program> onProgramSelected,
-                     ChangeListener<Integer> onYearSelected,
-                     ChangeListener<String> onSectionSelected
+                               ChangeListener<String> onDepartmentSelected,
+                               ChangeListener<String> onProgramSelected,
+                               ChangeListener<Integer> onYearSelected,
+                               ChangeListener<String> onSectionSelected,
+                               EventHandler<ActionEvent> onClearButtonClicked
     ) {
 
         ObservableList<String> collage = FXCollections.observableArrayList();
         collage.addAll(Constants.colleges);
-
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-
-        ObservableList<Program> program = FXCollections.observableArrayList();
-        program.addAll(Program.Under_Grad, Program.Grad, Program.Post_Grad);
-
-        ObservableList<Integer> year = FXCollections.observableArrayList();
-        year.addAll(1, 2, 3, 4, 5);
-
-        ObservableList<String> section = FXCollections.observableArrayList();
-        section.addAll("A", "B", "C", "D");
 
         vBox = new VBox(10);
         vBox.setPadding(new Insets(10));
@@ -67,7 +60,12 @@ public class ComboList {
         sections.setPromptText("Section");
         sections.setDisable(true);
 
-        vBox.getChildren().addAll(collages, departments, programs, years, sections);
+        Button clearButton = new Button("Clear");
+        clearButton.setId("clearComboButton");
+        clearButton.getStyleClass().add("ui/css/label.css");
+        clearButton.setOnAction(onClearButtonClicked);
+
+        vBox.getChildren().addAll(collages, departments, programs, years, sections, clearButton);
     }
 
     public VBox getComboList() {
@@ -82,7 +80,7 @@ public class ComboList {
         return departments;
     }
 
-    public ComboBox<Program> getPrograms() {
+    public ComboBox<String> getPrograms() {
         return programs;
     }
 

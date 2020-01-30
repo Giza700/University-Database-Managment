@@ -29,7 +29,7 @@ public class TeacherWindow {
     TeacherWindow(BorderPane borderPane, ToolBar toolBar) {
         window = borderPane;
         setWindowTop(toolBar);
-        setWindowLeft();
+        window.setLeft(null);
         setWindowCenter();
         setWindowRight();
     }
@@ -108,7 +108,7 @@ public class TeacherWindow {
         window.setRight(scrollPane);
     }
 
-    private void setWindowLeft() {
+  /*  private void setWindowLeft() {
         ComboList comboList = new ComboList();
         comboList.setUPComboList(
                 (observable, oldValue, newValue) -> {
@@ -118,7 +118,7 @@ public class TeacherWindow {
                 }, (observable, oldValue, newValue) -> {
                 });
         window.setLeft(comboList.getComboList());
-    }
+    }*/
 
     private void setWindowCenter() {
         searchResults = new MyTableView<>(

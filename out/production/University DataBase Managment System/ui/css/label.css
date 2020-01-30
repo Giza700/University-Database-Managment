@@ -33,6 +33,10 @@
     -fx-background-color: #F53C3C;
     -fx-text-fill: white;
 }
+#clearComboButton {
+    -fx-background-color: #F53C3C;
+    -fx-text-fill: white;
+}
 
 .title {
     -fx-text-fill: grey;

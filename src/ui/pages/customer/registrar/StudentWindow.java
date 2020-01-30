@@ -80,8 +80,14 @@ public class StudentWindow {
                 Constants.STUDENT_INPUTS
         );
         addNew.getColleges().valueProperty().addListener((observable, oldValue, newValue) -> {
-            addNew.getDepartment().setItems(FXCollections.observableArrayList(Constants.getDepartmentsOfCollege(newValue)));
+            addNew.getDepartment().setItems(DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", newValue));
+            addNew.getProgram().setDisable(true);
+            addNew.getProgram().setItems(null);
             addNew.getDepartment().setDisable(false);
+        });
+        addNew.getDepartment().valueProperty().addListener((observable, oldValue, newValue) -> {
+            addNew.getProgram().setItems(DataBaseManagement.getInstance().fetchProgramWithCondition("departmentId", newValue));
+            addNew.getProgram().setDisable(false);
         });
 
         editExisting = new Inputs("Edit student information",
@@ -90,7 +96,7 @@ public class StudentWindow {
                 Constants.STUDENT_INPUTS);
 
         editExisting.getColleges().valueProperty().addListener((observable, oldValue, newValue) -> {
-            editExisting.getDepartment().setItems(Constants.getDepartmentsOfCollege(editExisting.getColleges().getValue()));
+            editExisting.getDepartment().setItems(DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", newValue));
         });
 
         VBox deleteAccount = new VBox(5);
@@ -123,19 +129,31 @@ public class StudentWindow {
     private void setWindowLeft() {
         ComboList comboList = new ComboList();
         comboList.setUPComboList((observable, oldValue, newValue) -> {
-                    comboList.getDepartments().setItems(Constants.getDepartmentsOfCollege(newValue));
+                    comboList.getDepartments().setItems
+                            (DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", newValue));
                     comboList.getDepartments().setDisable(false);
+                    comboList.getPrograms().setDisable(true);
+                    comboList.getYears().setDisable(true);
+                    comboList.getSections().setDisable(true);
+
                     searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition("collegeId", newValue));
                 },
                 (observable, oldValue, newValue) -> {
-                    comboList.getPrograms().setItems(Constants.getProgramOfDepartment(newValue));
+                    comboList.getPrograms().setItems
+                            (DataBaseManagement.getInstance().fetchProgramWithCondition("departmentId", newValue));
                     comboList.getPrograms().setDisable(false);
+                    comboList.getYears().setDisable(true);
+                    comboList.getSections().setDisable(true);
                     searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
-                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + newValue+"'"));
+                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + newValue + "'"));
                 },
                 (observable, oldValue, newValue) -> {
-                    comboList.getYears().setItems(Constants.getYearsOfProgram(newValue));
+                    comboList.getYears().setItems(DataBaseManagement.getInstance().fetchYearsOfProgram("programId", newValue));
                     comboList.getYears().setDisable(false);
+                    comboList.getSections().setDisable(true);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
+                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + comboList.getDepartments().getValue() +
+                                    "' AND programId = '" + newValue + "'"));
 
                 },
                 (observable, oldValue, newValue) -> {
@@ -143,10 +161,21 @@ public class StudentWindow {
                     comboList.getSections().setDisable(false);
                     searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
                             ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + comboList.getDepartments().getValue() +
-                                    "' AND year = " + newValue));
+                                    "' AND programId = '" + comboList.getPrograms().getValue() + "' AND year = " + newValue));
                 },
                 (observable, oldValue, newValue) -> {
 
+                }, event -> {
+                    comboList.getCollages().setValue(null);
+                    comboList.getDepartments().setValue(null);
+                    comboList.getDepartments().setDisable(true);
+                    comboList.getPrograms().setValue(null);
+                    comboList.getPrograms().setDisable(true);
+                    comboList.getYears().setValue(null);
+                    comboList.getYears().setDisable(true);
+                    comboList.getSections().setValue(null);
+                    comboList.getSections().setDisable(true);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
                 });
         window.setLeft(comboList.getComboList());
     }
@@ -178,8 +207,9 @@ public class StudentWindow {
                 new Column("subCity", "String", 10),
                 new Column("street", "String", 10),
                 new Column("houseNo", "Int", 10),
-                new Column("collegeId", "String", 15),
-                new Column("departmentId", "String", 15)
+                new Column("collegeId", "String", 10),
+                new Column("departmentId", "String", 10),
+                new Column("programId", "String", 10)
         );
 
         try {
@@ -275,7 +305,7 @@ public class StudentWindow {
             editExisting.getColleges().setValue(student.getCollegeId());
             editExisting.getDepartment().setValue(student.getDepartmentId());
             editExisting.getDepartment().setDisable(false);
-            editExisting.getDepartment().setItems(Constants.getDepartmentsOfCollege(student.getCollegeId()));
+            editExisting.getDepartment().setItems(DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", student.getCollegeId()));
             id = editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[2]);
         });
     }

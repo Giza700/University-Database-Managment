@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import models.Account.Account;
 import models.Account.StudentAccount;
 import ui.Validation;
 import ui.customWidget.RadioButtonGrid;
@@ -48,7 +47,7 @@ public class Student{
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentAccounttWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentAccountWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
         }
         );
 
