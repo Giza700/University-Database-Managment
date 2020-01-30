@@ -11,6 +11,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ui.pages.Student.StudentPage;
+import ui.pages.admin.AdminPage;
 import ui.pages.customer.registrar.RegistrarPage;
 
 
@@ -33,6 +34,7 @@ public class MainPage extends Application {
         Label openAdmin = new Label("Admin");
         openAdmin.getStylesheets().add("ui/css/label.css");
         openAdmin.setOnMouseClicked(event -> {
+            new AdminPage(primaryStage);
             /*new LogIn();*/
             primaryStage.close();
         });

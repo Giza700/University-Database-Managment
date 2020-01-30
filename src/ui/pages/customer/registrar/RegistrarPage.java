@@ -32,11 +32,10 @@ public class RegistrarPage {
                     new StudentWindow(window, toolBar);
                 });
                 MyButton teachersSection = new MyButton("Teachers", event -> {
-                    new TeacherWindow(window,toolBar);
+                    new TeacherWindow(window, toolBar);
                 });
                 MyButton courseSection = new MyButton("Course", event -> {
-                    window.setCenter(new Label("StudentWindow Page"));
-                    window.setRight(null);
+                    new CourseWindow(window, toolBar);
                 });
                 ImageView imageView = new ImageView(getClass().getResource("/assets/back_arrow.png").toExternalForm());
                 imageView.setFitWidth(30);
@@ -47,7 +46,7 @@ public class RegistrarPage {
                 });
                 ButtonList buttonList = new ButtonList(studentSection, teachersSection, courseSection);
                 Pane spaceHolder = new Pane();
-                HBox.setHgrow(spaceHolder,Priority.ALWAYS);
+                HBox.setHgrow(spaceHolder, Priority.ALWAYS);
                 Button changePassword = new Button("Change Password");
                 changePassword.setId("transparentButton");
                 changePassword.getStyleClass().add("./ui/css/label.css");
@@ -55,7 +54,7 @@ public class RegistrarPage {
                     new PasswordChangeDialog();
                 });
 
-                toolBar.getItems().addAll(imageView, buttonList.getHBox(),spaceHolder,changePassword);
+                toolBar.getItems().addAll(imageView, buttonList.getHBox(), spaceHolder, changePassword);
 
                 Rectangle2D screen = Screen.getPrimary().getBounds();
                 Scene newScene = new Scene(window, screen.getWidth(), screen.getHeight());

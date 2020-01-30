@@ -60,6 +60,12 @@ public class Constants {
             "Password"
 
     };
+    public static final String[] COURSE_INPUTS = {
+            "Course Code",
+            "Name",
+            "Description",
+            "Credit Hours",
+    };
     public static final String[] colleges = {
             "AAIT", "CNCS", "CBE", "CDS", "CEBS", "CHS", "CHLJC", "CLGS", "CSS", "CVMA", "CPVA"
     };
