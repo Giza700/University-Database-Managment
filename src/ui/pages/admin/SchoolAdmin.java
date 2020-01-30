@@ -37,18 +37,15 @@ public class SchoolAdmin {
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.SCHOOLADMIN_INPUTS[0],
-                Constants.SCHOOLADMIN_INPUTS[1],
-                Constants.SCHOOLADMIN_INPUTS[2],
-                Constants.SCHOOLADMIN_INPUTS[3],
-                Constants.SCHOOLADMIN_INPUTS[4]
-        );
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
+        for (String string: Constants.SCHOOLADMIN_INPUTS){
+            radioButtonGrid.addRadioButton(string);
+        }
         TextField search = new TextField();
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-                    searchResults.setItem(DataBaseManagement.getInstance().fetchSchoolAdminAccountWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+                   searchResults.setItem(DataBaseManagement.getInstance().fetchSchoolAdminAccountWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
         }
         );
 
@@ -120,17 +117,6 @@ public class SchoolAdmin {
 
 
     }
-
-    public static String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "User Name";
-        else if (i == 3) return "Password";
-        else return "firstName";
-
-    }
-
-
-
 
     private void onSubmitButtonClicked() {
         if (Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])) != null ||

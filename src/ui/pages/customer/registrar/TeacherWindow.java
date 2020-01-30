@@ -35,31 +35,18 @@ public class TeacherWindow {
     }
 
     private void setWindowTop(ToolBar toolBar) {
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-
         TextField search = new TextField();
 
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.TEACHER_INPUTS[0],
-                Constants.TEACHER_INPUTS[1],
-                Constants.TEACHER_INPUTS[2],
-                Constants.TEACHER_INPUTS[3],
-                Constants.TEACHER_INPUTS[4],
-                Constants.TEACHER_INPUTS[5],
-                Constants.TEACHER_INPUTS[6],
-                Constants.TEACHER_INPUTS[7],
-                Constants.TEACHER_INPUTS[8],
-                Constants.TEACHER_INPUTS[9],
-                Constants.TEACHER_INPUTS[10],
-                Constants.TEACHER_INPUTS[11],
-                Constants.TEACHER_INPUTS[12]
-        );
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
+        for (String inputs : Constants.TEACHER_INPUTS) {
+            radioButtonGrid.addRadioButton(inputs);
+        }
+
 
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+            searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
         });
 
         HBox searchRow = new HBox();
@@ -160,22 +147,6 @@ public class TeacherWindow {
         }
         window.setCenter(searchResults.getTableView());
 
-    }
-
-    public String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "id";
-        else if (i == 3) return "sex";
-        else if (i == 4) return "dateOfBirth";
-        else if (i == 5) return "phoneNumber";
-        else if (i == 6) return "city";
-        else if (i == 7) return "subCity";
-        else if (i == 8) return "street";
-        else if (i == 9) return "houseNo";
-        else if (i == 10) return "salary";
-        else if (i == 11) return "officeNumber";
-        else if (i == 12) return "rank";
-        else return "firstName";
     }
 
     private void onSubmitButtonClicked() {

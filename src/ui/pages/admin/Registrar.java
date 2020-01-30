@@ -42,17 +42,15 @@ public class Registrar {
         department.addAll("SECE", "SCEE", "SMIE");
         TextField search = new TextField();
 
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.REGISTRAR_INPUTS[0],
-                Constants.REGISTRAR_INPUTS[1],
-                Constants.REGISTRAR_INPUTS[2],
-                Constants.REGISTRAR_INPUTS[3],
-                Constants.REGISTRAR_INPUTS[4]
-        );
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
+        for (String inputs : Constants.REGISTRAR_INPUTS) {
+            radioButtonGrid.addRadioButton(inputs);
+        }
+
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchRegistrarAccountWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+            searchResults.setItem(DataBaseManagement.getInstance().fetchRegistrarAccountWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
         });
 
         HBox searchRow = new HBox();
@@ -103,7 +101,6 @@ public class Registrar {
     }
 
 
-
     private void setWindowCenter() {
         searchResults = new MyTableView<>(
                 new MyTableColumn("First Name", "firstName"),
@@ -128,16 +125,6 @@ public class Registrar {
         window.setCenter(searchResults.getTableView());
 
 
-
-    }
-
-
-    public static String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "User Name";
-        else if (i == 3) return "Password";
-        else return "firstName";
-
     }
 
     private void onSubmitButtonClicked() {
@@ -145,12 +132,11 @@ public class Registrar {
         if (Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])) != null ||
                 Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[1])) != null) {
             addNew.setMessage(Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])));
-        } else if(Validation.validateuserName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3])) !=null ){
+        } else if (Validation.validateuserName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3])) != null) {
             addNew.setMessage(Validation.validateuserName(addNew.getTextFieldValue((Constants.REGISTRAR_INPUTS[3]))));
         }/*else if (Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4]) !=null)){
             addNew.setMessage(Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4])));
-        }*/
-        else {
+        }*/ else {
             DataBaseManagement.getInstance().insertDataIntoTable("RegistrarAccount",
                     new ColumnValue(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0]), "firstName"),
                     new ColumnValue(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[1]), "lastName"),
@@ -162,9 +148,8 @@ public class Registrar {
         }
 
 
-
-
     }
+
     private void onEditButtonClicked() {
         DataBaseManagement.getInstance().updateValueInTable("RegistrarAccount",
                 "username=\"" + userName + "\"",
@@ -177,7 +162,6 @@ public class Registrar {
         );
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromRegistrarAccount("*"));
     }
-
 
 
     private void onLoadButtonClicked() {
@@ -201,5 +185,4 @@ public class Registrar {
 
     }
 
-
-    }
+}

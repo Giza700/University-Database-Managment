@@ -18,7 +18,7 @@ import ui.customWidget.RadioButtonGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
 
-public class Student{
+public class Student {
     private BorderPane window;
     private Inputs addNew;
     private Inputs editExisting;
@@ -31,24 +31,22 @@ public class Student{
         setWindowCenter();
         setWindowRight();
     }
+
     private void setWindowTop(ToolBar toolBar) {
 
         ObservableList<String> department = FXCollections.observableArrayList();
         department.addAll("SECE", "SCEE", "SMIE");
 
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.STUDENTACCOUNT_INPUTS[0],
-                Constants.STUDENTACCOUNT_INPUTS[1],
-                Constants.STUDENTACCOUNT_INPUTS[2],
-                Constants.STUDENTACCOUNT_INPUTS[3],
-                Constants.STUDENTACCOUNT_INPUTS[4]
-        );
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
+        for (String inputs : Constants.STUDENTACCOUNT_INPUTS) {
+            radioButtonGrid.addRadioButton(inputs);
+        }
         TextField search = new TextField();
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentAccountWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
-        }
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentAccountWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+                }
         );
 
         HBox searchRow = new HBox();
@@ -95,6 +93,7 @@ public class Student{
         window.setRight(scrollPane);
 
     }
+
     private void setWindowCenter() {
         searchResults = new MyTableView<>(
                 new MyTableColumn("First Name", "firstName"),
@@ -110,40 +109,25 @@ public class Student{
                 new Column("User Name", "String", 15),
                 new Column("Password", "String", 15)
         );
-            try {
-                searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudentAccount("*"));
-            } catch (NullPointerException e) {
-                System.out.println("Empty StudentAccount List");
-            }
-            window.setCenter(searchResults.getTableView());
-
+        try {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudentAccount("*"));
+        } catch (NullPointerException e) {
+            System.out.println("Empty StudentAccount List");
+        }
+        window.setCenter(searchResults.getTableView());
 
 
     }
-
-
-
-    public static String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "User Name";
-        else if (i == 3) return "Password";
-        else return "firstName";
-
-    }
-
-
-
 
     private void onSubmitButtonClicked() {
         if (Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])) != null ||
                 Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[1])) != null) {
             addNew.setMessage(Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])));
-        } else if(Validation.validateuserName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3])) !=null ){
+        } else if (Validation.validateuserName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3])) != null) {
             addNew.setMessage(Validation.validateuserName(addNew.getTextFieldValue((Constants.REGISTRAR_INPUTS[3]))));
         }/*else if (Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4]) !=null)){
             addNew.setMessage(Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4])));
-        }*/
-        else {
+        }*/ else {
             DataBaseManagement.getInstance().insertDataIntoTable("StudentAccount",
                     new ColumnValue(addNew.getTextFieldValue(Constants.STUDENTACCOUNT_INPUTS[0]), "firstName"),
                     new ColumnValue(addNew.getTextFieldValue(Constants.STUDENTACCOUNT_INPUTS[1]), "lastName"),
@@ -155,8 +139,8 @@ public class Student{
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudentAccount("*"));
 
 
-
     }
+
     private void onEditButtonClicked() {
         DataBaseManagement.getInstance().updateValueInTable("StudentAccount",
                 "username=\"" + userName + "\"",
@@ -169,6 +153,7 @@ public class Student{
         );
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudentAccount("*"));
     }
+
     private void onLoadButtonClicked() {
         ObservableList<StudentAccount> selected = searchResults.getSelectionModels().getSelectedItems();
         selected.forEach(StudentAccount -> {

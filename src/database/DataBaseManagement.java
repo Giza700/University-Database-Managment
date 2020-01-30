@@ -13,7 +13,6 @@ import models.Account.StudentAccount;
 import models.Sex;
 import models.*;
 import models.faculty.Teacher;
-
 import java.sql.*;
 
 public class DataBaseManagement {
@@ -147,7 +146,7 @@ public class DataBaseManagement {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return teacherList;
     }
 
     private ObservableList<RegistrarAccount> makeRegistrarAccountObservable(ResultSet resultSet) {

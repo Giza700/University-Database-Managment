@@ -35,12 +35,13 @@ public class StudentWindow {
     }
 
     private void setWindowTop(ToolBar toolBar) {
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
         TextField search = new TextField();
 
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.STUDENT_INPUTS[0],
+        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
+        for (String inputs:Constants.STUDENT_INPUTS){
+            radioButtonGrid.addRadioButton(inputs);
+        }
+          /*      Constants.STUDENT_INPUTS[0],
                 Constants.STUDENT_INPUTS[1],
                 Constants.STUDENT_INPUTS[2],
                 Constants.STUDENT_INPUTS[3],
@@ -51,12 +52,12 @@ public class StudentWindow {
                 Constants.STUDENT_INPUTS[8],
                 Constants.STUDENT_INPUTS[9],
                 Constants.STUDENT_INPUTS[10]
-        );
+        );*/
 
         search.setMinWidth(400);
         search.setPromptText("Search");
         search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
         });
 
         HBox searchRow = new HBox();
@@ -220,20 +221,7 @@ public class StudentWindow {
         window.setCenter(searchResults.getTableView());
     }
 
-    public static String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "id";
-        else if (i == 3) return "sex";
-        else if (i == 4) return "dob";
-        else if (i == 5) return "phoneNumber";
-        else if (i == 6) return "city";
-        else if (i == 7) return "subCity";
-        else if (i == 8) return "street";
-        else if (i == 9) return "houseNo";
-        else return "firstName";
-    }
-
-    private void onSubmitButtonClicked() {
+       private void onSubmitButtonClicked() {
         //TODO check if combo box values have been selected
         if (Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0])) != null ||
                 Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[1])) != null) {
@@ -304,8 +292,11 @@ public class StudentWindow {
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[10], Integer.toString(student.getHouseNo()));
             editExisting.getColleges().setValue(student.getCollegeId());
             editExisting.getDepartment().setValue(student.getDepartmentId());
+            editExisting.getProgram().setValue(student.getProgramId());
             editExisting.getDepartment().setDisable(false);
+            editExisting.getProgram().setDisable(false);
             editExisting.getDepartment().setItems(DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", student.getCollegeId()));
+            editExisting.getProgram().setItems(DataBaseManagement.getInstance().fetchProgramWithCondition("departmentId", student.getDepartmentId()));
             id = editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[2]);
         });
     }
