@@ -11,7 +11,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ui.pages.Student.StudentPage;
-import ui.pages.admin.AdminPage;
 import ui.pages.customer.registrar.RegistrarPage;
 
 

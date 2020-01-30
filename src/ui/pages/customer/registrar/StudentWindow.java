@@ -130,14 +130,20 @@ public class StudentWindow {
                 (observable, oldValue, newValue) -> {
                     comboList.getPrograms().setItems(Constants.getProgramOfDepartment(newValue));
                     comboList.getPrograms().setDisable(false);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
+                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + newValue+"'"));
                 },
                 (observable, oldValue, newValue) -> {
                     comboList.getYears().setItems(Constants.getYearsOfProgram(newValue));
                     comboList.getYears().setDisable(false);
+
                 },
                 (observable, oldValue, newValue) -> {
                     comboList.getSections().setItems(Constants.getSectionOfYear(newValue));
                     comboList.getSections().setDisable(false);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
+                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + comboList.getDepartments().getValue() +
+                                    "' AND year = " + newValue));
                 },
                 (observable, oldValue, newValue) -> {
 

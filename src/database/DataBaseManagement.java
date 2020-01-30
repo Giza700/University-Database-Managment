@@ -46,7 +46,7 @@ public class DataBaseManagement {
         }
     }
 
-    private ResultSet fetchColumnsFromTable(String tableName, String comparingColumn, String newValue, String... columns) {
+    private ResultSet fetchColumnsFromTableOld(String tableName, String comparingColumn, String newValue, String... columns) {
         String query = "SELECT ";
         boolean isFirst = true;
         for (String column : columns) {
@@ -65,7 +65,29 @@ public class DataBaseManagement {
             Statement statement = connection.createStatement();
             return statement.executeQuery(query);
         } catch (SQLException e) {
-            System.out.println("Error: From the fetch Columns Tables");
+            System.out.println("Error: From the first fetch Columns method");
+            return null;
+        }
+    }
+    private ResultSet fetchColumnsFromTableNew(String tableName, String condition, String... columns) {
+        String query = "SELECT ";
+        boolean isFirst = true;
+        for (String column : columns) {
+            if (isFirst) {
+                query += column;
+                isFirst = false;
+            } else {
+                query += ("," + column);
+            }
+        }
+        query += " FROM " + tableName;
+        query += " WHERE " + condition;
+
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery(query);
+        } catch (SQLException e) {
+            System.out.println("Error: From the second fetch Columns method");
             return null;
         }
     }
@@ -146,13 +168,17 @@ public class DataBaseManagement {
         return null;
     }
 
-    public ObservableList<Student> fetchStudentWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
+    public ObservableList<Student> fetchStudentWithCondition(String comparingColumnOrCondition, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTableOld("Student", comparingColumnOrCondition, newValue, "*");
+        return makeStudentObservable(resultSet);
+    }
+    public ObservableList<Student> fetchStudentWithCondition(String condition) {
+        ResultSet resultSet = fetchColumnsFromTableNew("Student", condition, "*");
         return makeStudentObservable(resultSet);
     }
 
     public ObservableList<RegistrarAccount> fetchRegistrarAccountWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
+        ResultSet resultSet = fetchColumnsFromTableOld("Student", comparingColumn, newValue, "*");
         return makeRegistrarAccountObservable(resultSet);
     }
 
@@ -218,62 +244,64 @@ public class DataBaseManagement {
 
 
     public ObservableList<Student> fetchWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
+        ResultSet resultSet = fetchColumnsFromTableOld("Student", comparingColumn, newValue, "*");
         return makeStudentObservable(resultSet);
 
     }
 
     public ObservableList<Teacher> fetchTeacherWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("Teacher", comparingColumn, newValue, "*");
+        ResultSet resultSet = fetchColumnsFromTableOld("Teacher", comparingColumn, newValue, "*");
         return makeTeacherObservable(resultSet);
     }
+
     public ObservableList<SchoolAdminAccount> fetchSchoolAdminAccountWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("SchoolAdminAccount", comparingColumn, newValue, "*");
+        ResultSet resultSet = fetchColumnsFromTableOld("SchoolAdminAccount", comparingColumn, newValue, "*");
         return makeSchoolAdminAccountObservable(resultSet);
     }
+
     public ObservableList<TeacherAccount> fetchTeacherAccountWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("TeacherAccount", comparingColumn, newValue, "*");
+        ResultSet resultSet = fetchColumnsFromTableOld("TeacherAccount", comparingColumn, newValue, "*");
         return makeTeacherAccountObservable(resultSet);
     }
 
     public ObservableList<StudentAccount> fetchStudentAccounttWithCondition(String comparingColumn, String newValue) {
-        ResultSet resultSet = fetchColumnsFromTable("Student", comparingColumn, newValue, "*");
+        ResultSet resultSet = fetchColumnsFromTableOld("Student", comparingColumn, newValue, "*");
         return makeStudentAccountObservable(resultSet);
     }
 
     public ObservableList<Student> fetchColumnsFromStudent(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Student", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("Student", "", "", columns);
         return makeStudentObservable(resultSet);
     }
 
     public ObservableList<Teacher> fetchColumnsFromTeacher(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Teacher", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("Teacher", "", "", columns);
         return makeTeacherObservable(resultSet);
     }
 
     public ObservableList<RegistrarAccount> fetchColumnsFromRegistrarAccount(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("RegistrarAccount", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("RegistrarAccount", "", "", columns);
         return makeRegistrarAccountObservable(resultSet);
     }
 
     public ObservableList<SchoolAdminAccount> fetchColumnsFromSchoolAdminAccount(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("SchoolAdminAccount", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("SchoolAdminAccount", "", "", columns);
         return makeSchoolAdminAccountObservable(resultSet);
     }
 
     public ObservableList<TeacherAccount> fetchColumnsFromTeacherAccount(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("TeacherAccount", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("TeacherAccount", "", "", columns);
         return makeTeacherAccountObservable(resultSet);
     }
 
     public ObservableList<StudentAccount> fetchColumnsFromStudentAccount(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("StudentAccount", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("StudentAccount", "", "", columns);
         return makeStudentAccountObservable(resultSet);
     }
 
 
     public ObservableList<Course> fetchColumnsFromCourse(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Course", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("Course", "", "", columns);
         ObservableList<Course> courseList = FXCollections.observableArrayList();
         try {
             while (resultSet.next()) {
@@ -293,7 +321,7 @@ public class DataBaseManagement {
     }
 
     public ObservableList<Department> fetchColumnsFromDepartment(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Department", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("Department", "", "", columns);
         ObservableList<Department> departmentList = FXCollections.observableArrayList();
         try {
             while (resultSet.next()) {
@@ -316,7 +344,7 @@ public class DataBaseManagement {
     }
 
     public ObservableList<Section> fetchColumnsFromSection(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Section", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("Section", "", "", columns);
         ObservableList<Section> sectionList = FXCollections.observableArrayList();
         try {
             while (resultSet.next()) {
@@ -337,7 +365,7 @@ public class DataBaseManagement {
     }
 
     public ObservableList<Dependants> fetchColumnsFromDependants(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Section", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("Section", "", "", columns);
         ObservableList<Dependants> sectionList = FXCollections.observableArrayList();
         try {
             while (resultSet.next()) {
@@ -357,7 +385,7 @@ public class DataBaseManagement {
     }
 
     public ObservableList<Account> fetchColumnsFromUserName(String... columns) {
-        ResultSet resultSet = fetchColumnsFromTable("Account", "", "", columns);
+        ResultSet resultSet = fetchColumnsFromTableOld("Account", "", "", columns);
         ObservableList<Account> accountList = FXCollections.observableArrayList();
         try {
             while (resultSet.next()) {
@@ -481,14 +509,15 @@ public class DataBaseManagement {
             e.printStackTrace();
         }
     }
+
     public void getDepartments() {
-        String query  = "SELECT * FROM department " +
+        String query = "SELECT * FROM department " +
                 "JOIN coll_dep ON department.d_id = coll_dep.dep_id " +
                 "JOIN college ON coll_dep.coll_id = college.c_id " +
                 "WHERE college.c_id = 'AAIT'";
 
-        try (Statement statement  = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)){
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {
                 System.out.println(resultSet.getString(2));
