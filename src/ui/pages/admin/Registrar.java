@@ -20,6 +20,7 @@ import ui.customWidget.RadioButtonGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
 import ui.Validation;
+import ui.customWidget.SearchTool;
 
 public class Registrar {
 
@@ -37,31 +38,12 @@ public class Registrar {
     }
 
     private void setWindowTop(ToolBar toolBar) {
-
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-        TextField search = new TextField();
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
-        for (String inputs : Constants.REGISTRAR_INPUTS) {
-            radioButtonGrid.addRadioButton(inputs);
-        }
-
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchRegistrarAccountWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+        SearchTool searchTool = new SearchTool(Constants.REGISTRAR_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchRegistrarAccountWithCondition(
+                    Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
         });
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
 

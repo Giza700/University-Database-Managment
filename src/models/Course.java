@@ -1,27 +1,27 @@
 package models;
 
 public class Course {
-    private String courseNumber;
+    private String courseCode;
     private String courseName;
     private String description;
-    private double creditHour;
+    private int creditHour;
 
-    public Course(String courseNumber,
+    public Course(String courseCode,
                   String courseName,
                   String description,
-                  double creditHour) {
-        this.courseNumber = courseNumber;
+                  int creditHour) {
+        this.courseCode = courseCode;
         this.courseName = courseName;
         this.description = description;
         this.creditHour = creditHour;
     }
 
-    public String getCourseNumber() {
-        return courseNumber;
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    public void setCourseNumber(String courseNumber) {
-        this.courseNumber = courseNumber;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getCourseName() {
@@ -40,11 +40,11 @@ public class Course {
         this.description = description;
     }
 
-    public double getCreditHour() {
+    public int getCreditHour() {
         return creditHour;
     }
 
-    public void setCreditHour(double creditHour) {
+    public void setCreditHour(int creditHour) {
         this.creditHour = creditHour;
     }
 }

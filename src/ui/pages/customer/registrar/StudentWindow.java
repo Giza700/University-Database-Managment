@@ -35,40 +35,11 @@ public class StudentWindow {
     }
 
     private void setWindowTop(ToolBar toolBar) {
-        TextField search = new TextField();
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
-        for (String inputs:Constants.STUDENT_INPUTS){
-            radioButtonGrid.addRadioButton(inputs);
-        }
-          /*      Constants.STUDENT_INPUTS[0],
-                Constants.STUDENT_INPUTS[1],
-                Constants.STUDENT_INPUTS[2],
-                Constants.STUDENT_INPUTS[3],
-                Constants.STUDENT_INPUTS[4],
-                Constants.STUDENT_INPUTS[5],
-                Constants.STUDENT_INPUTS[6],
-                Constants.STUDENT_INPUTS[7],
-                Constants.STUDENT_INPUTS[8],
-                Constants.STUDENT_INPUTS[9],
-                Constants.STUDENT_INPUTS[10]
-        );*/
-
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+        SearchTool searchTool = new SearchTool(Constants.STUDENT_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition(Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
         });
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
     private void setWindowRight() {
@@ -221,7 +192,7 @@ public class StudentWindow {
         window.setCenter(searchResults.getTableView());
     }
 
-       private void onSubmitButtonClicked() {
+    private void onSubmitButtonClicked() {
         //TODO check if combo box values have been selected
         if (Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[0])) != null ||
                 Validation.validateName(addNew.getTextFieldValue(Constants.STUDENT_INPUTS[1])) != null) {

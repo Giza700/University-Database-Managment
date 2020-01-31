@@ -14,10 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Program;
 import models.faculty.Teacher;
-import ui.customWidget.ComboList;
-import ui.customWidget.Inputs;
-import ui.customWidget.MyTableView;
-import ui.customWidget.RadioButtonGrid;
+import ui.customWidget.*;
 
 public class TeacherWindow {
     private BorderPane window;
@@ -35,29 +32,11 @@ public class TeacherWindow {
     }
 
     private void setWindowTop(ToolBar toolBar) {
-        TextField search = new TextField();
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
-        for (String inputs : Constants.TEACHER_INPUTS) {
-            radioButtonGrid.addRadioButton(inputs);
-        }
-
-
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+        SearchTool searchTool = new SearchTool(Constants.TEACHER_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherWithCondition(Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
         });
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
     private void setWindowRight() {
@@ -94,18 +73,6 @@ public class TeacherWindow {
 
         window.setRight(scrollPane);
     }
-
-  /*  private void setWindowLeft() {
-        ComboList comboList = new ComboList();
-        comboList.setUPComboList(
-                (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                });
-        window.setLeft(comboList.getComboList());
-    }*/
 
     private void setWindowCenter() {
         searchResults = new MyTableView<>(
@@ -170,7 +137,7 @@ public class TeacherWindow {
     }
 
     private void onEditButtonClicked() {
-        DataBaseManagement.getInstance().updateValueInTable("Student",
+        DataBaseManagement.getInstance().updateValueInTable("Teacher",
                 "id=\"" + id + "\"",
                 new ColumnValue<>(editExisting.getTextFieldValue(Constants.TEACHER_INPUTS[0]), "firstName"),
                 new ColumnValue<>(editExisting.getTextFieldValue(Constants.TEACHER_INPUTS[1]), "lastName"),
@@ -207,7 +174,7 @@ public class TeacherWindow {
             editExisting.setTextFieldValue(Constants.TEACHER_INPUTS[10], Double.toString(teacher.getSalary()));
             editExisting.setTextFieldValue(Constants.TEACHER_INPUTS[11], teacher.getOfficeNumber());
             editExisting.setTextFieldValue(Constants.TEACHER_INPUTS[12], teacher.getRank());
-            id = editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[2]);
+            id = editExisting.getTextFieldValue(Constants.TEACHER_INPUTS[2]);
 
         });
     }

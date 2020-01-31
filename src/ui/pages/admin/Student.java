@@ -17,6 +17,7 @@ import ui.Validation;
 import ui.customWidget.RadioButtonGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
+import ui.customWidget.SearchTool;
 
 public class Student {
     private BorderPane window;
@@ -33,31 +34,12 @@ public class Student {
     }
 
     private void setWindowTop(ToolBar toolBar) {
-
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid();
-        for (String inputs : Constants.STUDENTACCOUNT_INPUTS) {
-            radioButtonGrid.addRadioButton(inputs);
-        }
-        TextField search = new TextField();
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentAccountWithCondition(Constants.getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
-                }
-        );
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        SearchTool searchTool = new SearchTool(Constants.STUDENTACCOUNT_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentAccountWithCondition(
+                    Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
+        });
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
 

@@ -148,6 +148,24 @@ public class DataBaseManagement {
         }
         return teacherList;
     }
+    private ObservableList<Course> makeCourseObservable(ResultSet resultSet) {
+        ObservableList<Course> courseList = FXCollections.observableArrayList();
+        try {
+            while (resultSet.next()) {
+                Course course = new Course(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getInt(4)
+                );
+                courseList.add(course);
+            }
+            return courseList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courseList;
+    }
 
     private ObservableList<RegistrarAccount> makeRegistrarAccountObservable(ResultSet resultSet) {
         ObservableList<RegistrarAccount> accountList = FXCollections.observableArrayList();
@@ -295,6 +313,10 @@ public class DataBaseManagement {
     public ObservableList<Teacher> fetchTeacherWithCondition(String comparingColumn, String newValue) {
         ResultSet resultSet = fetchColumnsFromTableOld("Teacher", comparingColumn, newValue, "*");
         return makeTeacherObservable(resultSet);
+    }
+    public ObservableList<Course> fetchCourseWithCondition(String comparingColumn, String newValue) {
+        ResultSet resultSet = fetchColumnsFromTableOld("Course", comparingColumn, newValue, "*");
+        return makeCourseObservable(resultSet);
     }
 
     public ObservableList<SchoolAdminAccount> fetchSchoolAdminAccountWithCondition(String comparingColumn, String newValue) {

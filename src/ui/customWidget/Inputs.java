@@ -231,6 +231,12 @@ public class Inputs {
                 return "Abebe159";
             case "Password":
                 return "Testing123";
+            case "Course Code":
+                return "ECEG-1204";
+            case "Name":
+                return "Database Systems";
+            case "Credit Hours":
+                return "5";
             default:
                 return "";
         }
