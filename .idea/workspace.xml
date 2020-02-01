@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added joinAndFetch Method" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added joinAndFetch Method">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <list id="f9f724e7-3e13-4755-87a0-dd11291cc7b5" name="Changelist2" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,7 +81,7 @@
     <session id="604409966">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.37" value="1" />
           <entry key="project.open.time.49" value="1" />
@@ -90,25 +92,25 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="69" />
-          <entry key="java" value="3397" />
+          <entry key="java" value="3400" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="69" />
-          <entry key="JAVA" value="3397" />
+          <entry key="JAVA" value="3400" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="2" />
-          <entry key="java" value="35" />
+          <entry key="java" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="JAVA" value="35" />
+          <entry key="JAVA" value="36" />
         </counts>
       </usages-collector>
     </session>
@@ -192,26 +194,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ui/pages/admin/Teacher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="42" column="68" selection-start-line="42" selection-start-column="68" selection-end-line="42" selection-end-column="68" />
+            <state relative-caret-position="25">
+              <caret line="37" column="8" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="42" selection-end-column="68" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/Course.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ui/pages/Student/CourseList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
-              <folding>
-                <element signature="e#521#522#0" expanded="true" />
-                <element signature="e#556#557#0" expanded="true" />
-                <element signature="e#1035#1036#0" expanded="true" />
-                <element signature="e#1068#1069#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1180">
+              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
             </state>
           </provider>
         </entry>
@@ -240,7 +236,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/models/UserName.java" />
         <option value="$PROJECT_DIR$/src/models/Registrar.java" />
         <option value="$PROJECT_DIR$/src/models/RegistrarAccount.java" />
         <option value="$PROJECT_DIR$/src/models/Account.java" />
@@ -291,6 +286,7 @@
         <option value="$PROJECT_DIR$/src/ui/pages/admin/SchoolAdmin.java" />
         <option value="$PROJECT_DIR$/src/ui/pages/admin/Student.java" />
         <option value="$PROJECT_DIR$/src/ui/pages/admin/Teacher.java" />
+        <option value="$PROJECT_DIR$/src/ui/pages/Student/CourseList.java" />
       </list>
     </option>
   </component>
@@ -347,30 +343,7 @@
               <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="customWidget" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="University-Database-Managment" type="b2602c69:ProjectViewProjectNode" />
-              <item name="University-Database-Managment" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="registrar" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -391,7 +364,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580488599869" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1580488825100" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="F:/Software/sqlite-jdbc-3.27.2.1.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -648,7 +621,7 @@
       <workItem from="1580339626661" duration="3081000" />
       <workItem from="1580393226713" duration="10162000" />
       <workItem from="1580416843795" duration="7135000" />
-      <workItem from="1580485151907" duration="3346000" />
+      <workItem from="1580485151907" duration="3709000" />
     </task>
     <task id="LOCAL-00001" summary="Added Basic Model classes">
       <created>1573859325474</created>
@@ -794,12 +767,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197593000" />
+    <option name="totallyTimeSpent" value="197956000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.19288956" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.19288956" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" weight="0.32980332" />
       <window_info id="Designer" order="3" />
@@ -808,7 +781,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.20983607" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.51311475" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23278688" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.17213115" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -821,7 +794,7 @@
       <window_info anchor="bottom" id="Event Log" order="12" weight="0.20819671" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.21803279" />
       <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="15" visible="true" weight="0.2852459" />
+      <window_info anchor="bottom" id="Terminal" order="15" weight="0.5622951" />
       <window_info anchor="bottom" id="Thumbnails" order="16" weight="0.3295082" />
       <window_info anchor="bottom" id="Docker" order="17" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -905,7 +878,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ui/customeWidget.java" />
     <entry file="file://$PROJECT_DIR$/src/ui/customWidget/MyTextField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1209,8 +1181,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/pages/admin/Teacher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="42" column="68" selection-start-line="42" selection-start-column="68" selection-end-line="42" selection-end-column="68" />
+        <state relative-caret-position="25">
+          <caret line="37" column="8" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="42" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/pages/Student/CourseList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1180">
+          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
         </state>
       </provider>
     </entry>
