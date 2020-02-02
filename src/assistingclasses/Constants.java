@@ -59,6 +59,18 @@ public class Constants {
             "Password"
 
     };
+    public static final String[] GRADE_INPUTS = {
+           // "letterGrade",
+            "numericGrade",
+            "courseNumber",
+            "studentId",
+            "teacherId"
+    };
+
+    public static final String[] LETTER_GRADES = {
+            "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
+    };
+
     public static final String[] colleges = {
             "AAIT", "CNCS", "CBE", "CDS", "CEBS", "CHS", "CHLJC", "CLGS", "CSS", "CVMA", "CPVA"
     };

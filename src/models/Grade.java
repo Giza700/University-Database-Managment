@@ -1,35 +1,43 @@
 package models;
 //TODO Grade is a weak entity, no primary key attributes of its own
 public class Grade {
-    private String grade;
-    private String courseId;
+    private String letterGrade;
+    private int numericGrade;
+    private String courseNumber;
     private String studentId;
     private String teacherId;
 
-    public Grade(String grade,
-                 String courseId,
-                 String studentId,
-                 String teacherId) {
-        this.grade = grade;
-        this.courseId = courseId;
+    public Grade(String letterGrade, int numericGrade, String courseNumber,
+                 String studentId, String teacherId) {
+        this.letterGrade = letterGrade;
+        this.numericGrade = numericGrade;
+        this.courseNumber = courseNumber;
         this.studentId = studentId;
         this.teacherId = teacherId;
     }
 
-    public String getGrade() {
-        return grade;
+    public String getLetterGrade() {
+        return letterGrade;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setLetterGrade(String letterGrade) {
+        this.letterGrade = letterGrade;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public int getNumericGrade() {
+        return numericGrade;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setNumericGrade(int numericGrade) {
+        this.numericGrade = numericGrade;
+    }
+
+    public String getCourseNumber() {
+        return courseNumber;
+    }
+
+    public void setCourseNumber(String courseNumber) {
+        this.courseNumber = courseNumber;
     }
 
     public String getStudentId() {

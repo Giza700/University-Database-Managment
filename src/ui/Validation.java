@@ -3,7 +3,6 @@ package ui;
 import assistingclasses.Constants;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Validation {
 
@@ -57,9 +56,17 @@ public class Validation {
     }
 
     public static String validatePassword(String password) {
-        if (password.equals("")) return "password filed can't be empty";
+        if (password.equals("")) return "password field can't be empty";
         else if (password.contains("/"))
             return "Password can't contain special character";// TODO Add a method for all special characters
+        else return null;
+    }
+    public static String validateLetterGrade(String letterGrade){
+        char[] letterGradee = letterGrade.toCharArray();
+        char letterGradee2 = letterGradee[0];
+        if(letterGrade.equals("")) return "Grade field cant be empty";
+        else if(Character.isDigit(letterGradee2)) return "Grade field can't be an integer";
+        //TODO Add a checlist for grades above F
         else return null;
     }
 }
