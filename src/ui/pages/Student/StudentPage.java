@@ -1,24 +1,34 @@
-package ui.pages.customer.registrar;
+package ui.pages.Student;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import ui.customWidget.*;
+import ui.customWidget.ButtonList;
+import ui.customWidget.MyButton;
+import ui.customWidget.PasswordChangeDialog;
+import ui.pages.admin.Registrar;
+import ui.pages.admin.SchoolAdmin;
+import ui.pages.admin.Student;
+import ui.pages.admin.Teacher;
+import ui.pages.customer.registrar.StudentWindow;
 
+import java.awt.*;
 
-public class RegistrarPage {
-
-    private Application registrarPage;
+public class StudentPage {
+    private Application StudentPage;
     private Stage parentStage;
-
-    public RegistrarPage(Stage parentStage) {
+    public StudentPage(Stage parentStage) {
         this.parentStage = parentStage;
-        registrarPage = new Application() {
+        StudentPage = new Application() {
             @Override
             public void start(Stage primaryStage) throws Exception {
 
@@ -26,17 +36,26 @@ public class RegistrarPage {
                 window.getStyleClass().add("mainBlack");
                 window.getStylesheets().add("./ui/css/label.css");
                 ToolBar toolBar = new ToolBar();
-                new StudentWindow(window, toolBar);
+              new CourseList(window, toolBar);
+                new GradeReport(window, toolBar);
+                //new Schedule(window, toolBar);
 
-                MyButton studentSection = new MyButton("Students", event -> {
-                    new StudentWindow(window, toolBar);
+
+                MyButton CourseListSection = new MyButton("CourseList", event -> {
+                   new CourseList(window, toolBar);
+
                 });
-                MyButton teachersSection = new MyButton("Teachers", event -> {
-                    new TeacherWindow(window, toolBar);
+                MyButton GradeReportSection = new MyButton("GradeReport", event -> {
+                    new GradeReport(window, toolBar);
                 });
-                MyButton courseSection = new MyButton("Course", event -> {
-                    new CourseWindow(window, toolBar);
+                MyButton ScheduleSection = new MyButton("Schedule", event -> {
+                    //new Schedule(window, toolBar);
                 });
+
+
+
+
+
                 ImageView imageView = new ImageView(getClass().getResource("/assets/back_arrow.png").toExternalForm());
                 imageView.setFitWidth(30);
                 imageView.setFitHeight(30);
@@ -44,7 +63,8 @@ public class RegistrarPage {
                     primaryStage.close();
                     parentStage.show();
                 });
-                ButtonList buttonList = new ButtonList(studentSection, teachersSection, courseSection);
+
+                ButtonList buttonList = new ButtonList(CourseListSection,GradeReportSection,ScheduleSection);
                 Pane spaceHolder = new Pane();
                 HBox.setHgrow(spaceHolder, Priority.ALWAYS);
                 Button changePassword = new Button("Change Password");
@@ -54,7 +74,8 @@ public class RegistrarPage {
                     new PasswordChangeDialog();
                 });
 
-                toolBar.getItems().addAll(imageView, buttonList.getHBox(), spaceHolder, changePassword);
+                toolBar.getItems().addAll(imageView, buttonList.getHBox(),spaceHolder,changePassword);
+
 
                 Rectangle2D screen = Screen.getPrimary().getBounds();
                 Scene newScene = new Scene(window, screen.getWidth(), screen.getHeight());
@@ -65,9 +86,10 @@ public class RegistrarPage {
 
         };
         try {
-            registrarPage.start(new Stage());
+            StudentPage.start(new Stage());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

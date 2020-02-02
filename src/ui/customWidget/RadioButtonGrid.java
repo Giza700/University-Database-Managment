@@ -14,64 +14,40 @@ import java.util.ArrayList;
 
 public class RadioButtonGrid {
     private GridPane radioButtonGrid;
-    private RadioButton[] radioButtons;
+    private ArrayList<RadioButton> radioButtons;
+    private ToggleGroup toggleGroup = new ToggleGroup();
 
     public GridPane getRadioButtonGrid() {
         return radioButtonGrid;
     }
 
-    public RadioButtonGrid(String... name) {
-        ToggleGroup toggleGroup = new ToggleGroup();
+    public RadioButtonGrid() {
         radioButtonGrid = new GridPane();
-        radioButtons = new RadioButton[name.length];
+        radioButtons = new ArrayList<>();
         radioButtonGrid.setMaxHeight(50);
         radioButtonGrid.setVgap(5);
         radioButtonGrid.setHgap(5);
         radioButtonGrid.setPadding(new Insets(5));
 
-        for (int i = 0, k = 0; i < name.length; i += 2) {
-            try {
-                int j = 0;
-                RadioButton radioButton = new RadioButton(name[i]);
-                radioButtons[i] = radioButton;
-                radioButton.getStyleClass().add("checkBox");
-                radioButton.getStylesheets().add("./ui/css/label.css");
-                radioButton.setToggleGroup(toggleGroup);
-                radioButton.setId(name[i]);
-               /* radioButton.setOnAction(event -> {
-                    if (entityType == 1)
-                        DataBaseManagement.getInstance().fetchStudentWithCondition(StudentWindow.getComparingColumn(i), searchField.getText());
-                });*/
-                GridPane.setConstraints(radioButton, k, j);
-                radioButtonGrid.getChildren().add(radioButton);
-
-                j++;
-
-                RadioButton radioButton1 = new RadioButton(name[i + 1]);
-                radioButtons[i + 1] = radioButton1;
-                radioButton1.getStyleClass().add("checkBox");
-                radioButton1.getStylesheets().add("./ui/css/label.css");
-                radioButton1.setToggleGroup(toggleGroup);
-                radioButton1.setId(name[i + 1]);
-              /*  radioButton1.setOnAction(event -> {
-                    if (entityType == 1)
-                        DataBaseManagement.getInstance().fetchStudentWithCondition("userName", searchField.getText());
-                });*/
-                GridPane.setConstraints(radioButton1, k, j);
-                radioButtonGrid.getChildren().add(radioButton1);
-                k++;
-            } catch (IndexOutOfBoundsException e) {
-
-            }
-        }
-        radioButtons[0].setSelected(true);
     }
 
-    public int getSelectedRadio() {
-        for (int i = 0; i < radioButtons.length; i++) {
-            if (radioButtons[i].isSelected()) return i;
+    public void addRadioButton(String radioButton) {
+        RadioButton newButton = new RadioButton(radioButton);
+        newButton.getStyleClass().add("checkBox");
+        newButton.getStylesheets().add("./ui/css/label.css");
+        newButton.setToggleGroup(toggleGroup);
+        newButton.setId(radioButton);
+        radioButtons.add(newButton);
+        GridPane.setConstraints(newButton, (radioButtons.size() - 1) / 2, (radioButtons.size() - 1) % 2);
+        radioButtonGrid.getChildren().add(newButton);
+        if (radioButtons.size() == 1) radioButtons.get(0).setSelected(true);
+    }
+
+    public RadioButton getSelectedRadio() {
+        for (RadioButton radioButton : radioButtons) {
+            if (radioButton.isSelected()) return radioButton;
         }
-        return 0;
+        return radioButtons.get(0);
     }
 
 }

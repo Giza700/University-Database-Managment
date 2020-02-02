@@ -35,39 +35,11 @@ public class StudentWindow {
     }
 
     private void setWindowTop(ToolBar toolBar) {
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-        TextField search = new TextField();
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.STUDENT_INPUTS[0],
-                Constants.STUDENT_INPUTS[1],
-                Constants.STUDENT_INPUTS[2],
-                Constants.STUDENT_INPUTS[3],
-                Constants.STUDENT_INPUTS[4],
-                Constants.STUDENT_INPUTS[5],
-                Constants.STUDENT_INPUTS[6],
-                Constants.STUDENT_INPUTS[7],
-                Constants.STUDENT_INPUTS[8],
-                Constants.STUDENT_INPUTS[9],
-                Constants.STUDENT_INPUTS[10]
-        );
-
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+        SearchTool searchTool = new SearchTool(Constants.STUDENT_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition(Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
         });
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
     private void setWindowRight() {
@@ -80,8 +52,14 @@ public class StudentWindow {
                 Constants.STUDENT_INPUTS
         );
         addNew.getColleges().valueProperty().addListener((observable, oldValue, newValue) -> {
-            addNew.getDepartment().setItems(FXCollections.observableArrayList(Constants.getDepartmentsOfCollege(newValue)));
+            addNew.getDepartment().setItems(DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", newValue));
+            addNew.getProgram().setDisable(true);
+            addNew.getProgram().setItems(null);
             addNew.getDepartment().setDisable(false);
+        });
+        addNew.getDepartment().valueProperty().addListener((observable, oldValue, newValue) -> {
+            addNew.getProgram().setItems(DataBaseManagement.getInstance().fetchProgramWithCondition("departmentId", newValue));
+            addNew.getProgram().setDisable(false);
         });
 
         editExisting = new Inputs("Edit student information",
@@ -90,7 +68,7 @@ public class StudentWindow {
                 Constants.STUDENT_INPUTS);
 
         editExisting.getColleges().valueProperty().addListener((observable, oldValue, newValue) -> {
-            editExisting.getDepartment().setItems(Constants.getDepartmentsOfCollege(editExisting.getColleges().getValue()));
+            editExisting.getDepartment().setItems(DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", newValue));
         });
 
         VBox deleteAccount = new VBox(5);
@@ -123,24 +101,53 @@ public class StudentWindow {
     private void setWindowLeft() {
         ComboList comboList = new ComboList();
         comboList.setUPComboList((observable, oldValue, newValue) -> {
-                    comboList.getDepartments().setItems(Constants.getDepartmentsOfCollege(newValue));
+                    comboList.getDepartments().setItems
+                            (DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", newValue));
                     comboList.getDepartments().setDisable(false);
+                    comboList.getPrograms().setDisable(true);
+                    comboList.getYears().setDisable(true);
+                    comboList.getSections().setDisable(true);
+
                     searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition("collegeId", newValue));
                 },
                 (observable, oldValue, newValue) -> {
-                    comboList.getPrograms().setItems(Constants.getProgramOfDepartment(newValue));
+                    comboList.getPrograms().setItems
+                            (DataBaseManagement.getInstance().fetchProgramWithCondition("departmentId", newValue));
                     comboList.getPrograms().setDisable(false);
+                    comboList.getYears().setDisable(true);
+                    comboList.getSections().setDisable(true);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
+                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + newValue + "'"));
                 },
                 (observable, oldValue, newValue) -> {
-                    comboList.getYears().setItems(Constants.getYearsOfProgram(newValue));
+                    comboList.getYears().setItems(DataBaseManagement.getInstance().fetchYearsOfProgram("programId", newValue));
                     comboList.getYears().setDisable(false);
+                    comboList.getSections().setDisable(true);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
+                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + comboList.getDepartments().getValue() +
+                                    "' AND programId = '" + newValue + "'"));
+
                 },
                 (observable, oldValue, newValue) -> {
                     comboList.getSections().setItems(Constants.getSectionOfYear(newValue));
                     comboList.getSections().setDisable(false);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchStudentWithCondition
+                            ("collegeId = '" + comboList.getCollages().getValue() + "' AND departmentId = '" + comboList.getDepartments().getValue() +
+                                    "' AND programId = '" + comboList.getPrograms().getValue() + "' AND year = " + newValue));
                 },
                 (observable, oldValue, newValue) -> {
 
+                }, event -> {
+                    comboList.getCollages().setValue(null);
+                    comboList.getDepartments().setValue(null);
+                    comboList.getDepartments().setDisable(true);
+                    comboList.getPrograms().setValue(null);
+                    comboList.getPrograms().setDisable(true);
+                    comboList.getYears().setValue(null);
+                    comboList.getYears().setDisable(true);
+                    comboList.getSections().setValue(null);
+                    comboList.getSections().setDisable(true);
+                    searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromStudent("*"));
                 });
         window.setLeft(comboList.getComboList());
     }
@@ -172,8 +179,9 @@ public class StudentWindow {
                 new Column("subCity", "String", 10),
                 new Column("street", "String", 10),
                 new Column("houseNo", "Int", 10),
-                new Column("collegeId", "String", 15),
-                new Column("departmentId", "String", 15)
+                new Column("collegeId", "String", 10),
+                new Column("departmentId", "String", 10),
+                new Column("programId", "String", 10)
         );
 
         try {
@@ -182,19 +190,6 @@ public class StudentWindow {
             searchResults.setItem(null);
         }
         window.setCenter(searchResults.getTableView());
-    }
-
-    public static String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "id";
-        else if (i == 3) return "sex";
-        else if (i == 4) return "dob";
-        else if (i == 5) return "phoneNumber";
-        else if (i == 6) return "city";
-        else if (i == 7) return "subCity";
-        else if (i == 8) return "street";
-        else if (i == 9) return "houseNo";
-        else return "firstName";
     }
 
     private void onSubmitButtonClicked() {
@@ -268,8 +263,11 @@ public class StudentWindow {
             editExisting.setTextFieldValue(Constants.STUDENT_INPUTS[10], Integer.toString(student.getHouseNo()));
             editExisting.getColleges().setValue(student.getCollegeId());
             editExisting.getDepartment().setValue(student.getDepartmentId());
+            editExisting.getProgram().setValue(student.getProgramId());
             editExisting.getDepartment().setDisable(false);
-            editExisting.getDepartment().setItems(Constants.getDepartmentsOfCollege(student.getCollegeId()));
+            editExisting.getProgram().setDisable(false);
+            editExisting.getDepartment().setItems(DataBaseManagement.getInstance().fetchDepartmentWithCondition("collegeId", student.getCollegeId()));
+            editExisting.getProgram().setItems(DataBaseManagement.getInstance().fetchProgramWithCondition("departmentId", student.getDepartmentId()));
             id = editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[2]);
         });
     }

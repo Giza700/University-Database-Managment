@@ -2,6 +2,7 @@ package assistingclasses;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.RadioButton;
 import models.Program;
 
 import java.time.LocalDate;
@@ -12,8 +13,8 @@ public class Constants {
             "First Name",
             "Last Name",
             "Email",
-            "Username",
-            "Password"
+            "User Name",
+            "Password"   //
     };
     public static final String[] STUDENT_INPUTS = {
             "First Name",
@@ -71,6 +72,12 @@ public class Constants {
             "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
     };
 
+    public static final String[] COURSE_INPUTS = {
+            "Course Code",
+            "Name",
+            "Description",
+            "Credit Hours",
+    };
     public static final String[] colleges = {
             "AAIT", "CNCS", "CBE", "CDS", "CEBS", "CHS", "CHLJC", "CLGS", "CSS", "CVMA", "CPVA"
     };
@@ -90,25 +97,6 @@ public class Constants {
     }
     //TODO replace with data from database
 
-    public static ObservableList<String> getDepartmentsOfCollege(String college) {
-        if (college.equals("AAIT")) return FXCollections.observableArrayList("SECE", "SCEE", "SMIE");
-        else if (college.equals("CNCS")) return FXCollections.observableArrayList("Phy", "Chem", "Bio");
-        else return FXCollections.observableArrayList();
-    }
-
-    public static ObservableList<Program> getProgramOfDepartment(String department) {
-        if (department.equals("SECE")) return FXCollections.observableArrayList(Program.Under_Grad);
-        else if (department.equals("SMIE")) return FXCollections.observableArrayList(Program.Under_Grad, Program.Grad);
-        else if (department.equals("SCEE"))
-            return FXCollections.observableArrayList(Program.Under_Grad, Program.Grad, Program.Post_Grad);
-        else return FXCollections.observableArrayList();
-    }
-
-    public static ObservableList<Integer> getYearsOfProgram(Program program) {
-        if (program == Program.Under_Grad) return FXCollections.observableArrayList(1, 2, 3, 4, 5);
-        else return FXCollections.observableArrayList(1, 2);
-    }
-
     public static ObservableList<String> getSectionOfYear(int year) {
         if (year == 1) return FXCollections.observableArrayList("A", "B", "C", "D");
         else if (year == 2) return FXCollections.observableArrayList("A", "B", "C");
@@ -116,6 +104,26 @@ public class Constants {
         else if (year == 4) return FXCollections.observableArrayList("A", "B");
         else if (year == 5) return FXCollections.observableArrayList("A");
         else return FXCollections.observableArrayList();
+    }
+    public static String getComparingColumn(RadioButton radioButton) {
+        if (radioButton.getText().equals(Constants.STUDENT_INPUTS[1])) return "lastName";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[2])) return "id";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[3])) return "sex";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[4])) return "year";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[5])) return "dateOfBirth";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[6])) return "phoneNumber";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[7])) return "city";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[8])) return "subCity";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[9])) return "street";
+        else if (radioButton.getText().equals(Constants.STUDENT_INPUTS[10])) return "houseNo";
+        else if (radioButton.getText().equals(Constants.TEACHER_INPUTS[10])) return "salary";
+        else if (radioButton.getText().equals(Constants.TEACHER_INPUTS[11])) return "officeNumber";
+        else if (radioButton.getText().equals(Constants.TEACHER_INPUTS[12])) return "rank";
+        else if (radioButton.getText().equals(Constants.REGISTRAR_INPUTS[2])) return "email";
+        else if (radioButton.getText().equals(Constants.REGISTRAR_INPUTS[3])) return "userName";
+        else if (radioButton.getText().equals(Constants.REGISTRAR_INPUTS[4])) return "password";
+        else return "firstName";
+
     }
 }
 

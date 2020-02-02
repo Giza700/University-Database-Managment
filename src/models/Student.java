@@ -17,21 +17,24 @@ public class Student {
     private String city;
     private String collegeId;
     private String departmentId;
+    private String programId;
 
     public Student(//TODO overload constructor if this isn't used by the filters
-            String firstName,
-            String lastName,
-            String id,
-            Sex sex,
-            int year,
-            LocalDate dataOfBirth,
-            int phoneNumber,
-            String city,
-            String subCity,
-            String street,
-            int houseNo,
-            String collegeId,
-            String departmentId) {
+                   String firstName,
+                   String lastName,
+                   String id,
+                   Sex sex,
+                   int year,
+                   LocalDate dataOfBirth,
+                   int phoneNumber,
+                   String city,
+                   String subCity,
+                   String street,
+                   int houseNo,
+                   String collegeId,
+                   String departmentId,
+                   String programId
+    ) {
 
         this.id = id;
         this.firstName = firstName;
@@ -46,6 +49,7 @@ public class Student {
         this.city = city;
         this.collegeId = collegeId;
         this.departmentId = departmentId;
+        this.programId = programId;
     }
 
     public String getId() {
@@ -143,12 +147,21 @@ public class Student {
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
     }
+
     public String getCollegeId() {
         return collegeId;
     }
 
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId;
+    }
+
+    public String getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(String programId) {
+        this.programId = programId;
     }
 
 

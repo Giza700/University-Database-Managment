@@ -18,6 +18,7 @@ import ui.Validation;
 import ui.customWidget.RadioButtonGrid;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
+import ui.customWidget.SearchTool;
 
 public class Teacher {
     private BorderPane window;
@@ -32,36 +33,14 @@ public class Teacher {
         setWindowCenter();
         setWindowRight();
     }
+
     private void setWindowTop(ToolBar toolBar) {
-
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.TEACHER_INPUTS[0],
-                Constants.TEACHER_INPUTS[1],
-                Constants.TEACHER_INPUTS[2],
-                Constants.TEACHER_INPUTS[3],
-                Constants.TEACHER_INPUTS[4]
-        );
-        TextField search = new TextField();
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-                    searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherAccountWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
-
-                }
-        );
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        SearchTool searchTool = new SearchTool(Constants.TEACHER_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherAccountWithCondition(
+                    Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
+        });
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
 
@@ -97,6 +76,7 @@ public class Teacher {
         window.setRight(scrollPane);
 
     }
+
     private void setWindowCenter() {
         searchResults = new MyTableView<>(
                 new MyTableColumn("First Name", "firstName"),
@@ -114,38 +94,25 @@ public class Teacher {
         );
 
 
-            try {
-                searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromTeacherAccount("*"));
-            } catch (NullPointerException e) {
-                System.out.println("Empty TeacherAccount List");
-            }
-            window.setCenter(searchResults.getTableView());
-
+        try {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromTeacherAccount("*"));
+        } catch (NullPointerException e) {
+            System.out.println("Empty TeacherAccount List");
         }
-
-    public static String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "User Name";
-        else if (i == 3) return "Password";
-        else return "firstName";
+        window.setCenter(searchResults.getTableView());
 
     }
-
-
-
-
 
     private void onSubmitButtonClicked() {
 
         if (Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])) != null ||
                 Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[1])) != null) {
             addNew.setMessage(Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])));
-        } else if(Validation.validateuserName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3])) !=null ){
+        } else if (Validation.validateuserName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[3])) != null) {
             addNew.setMessage(Validation.validateuserName(addNew.getTextFieldValue((Constants.REGISTRAR_INPUTS[3]))));
         }/*else if (Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4]) !=null)){
             addNew.setMessage(Validation.validatePassword(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[4])));
-        }*/
-        else {
+        }*/ else {
             DataBaseManagement.getInstance().insertDataIntoTable("TeacherAccount",
                     new ColumnValue(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[0]), "firstName"),
                     new ColumnValue(addNew.getTextFieldValue(Constants.SCHOOLADMIN_INPUTS[1]), "lastName"),
@@ -157,8 +124,8 @@ public class Teacher {
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromTeacherAccount("*"));
 
 
-
     }
+
     private void onEditButtonClicked() {
         DataBaseManagement.getInstance().updateValueInTable("TeacherAccount",
                 "username=\"" + userName + "\"",
@@ -171,6 +138,7 @@ public class Teacher {
         );
         searchResults.setItem(DataBaseManagement.getInstance().fetchColumnsFromTeacherAccount("*"));
     }
+
     private void onLoadButtonClicked() {
         ObservableList<TeacherAccount> selected = searchResults.getSelectionModels().getSelectedItems();
         selected.forEach(TeacherAccount -> {

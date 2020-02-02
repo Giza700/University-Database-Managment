@@ -12,6 +12,7 @@ public class MyTableView<T> {
 
     public MyTableView(MyTableColumn... columns) {
         tableView = new TableView<>();
+        //tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView.getStyleClass().add("table-view");
         tableView.getStylesheets().add("./ui/css/label.css");
 
@@ -26,14 +27,15 @@ public class MyTableView<T> {
             TableColumn newColumn = new TableColumn<>(column.getColumnName());
 
             newColumn.setCellValueFactory(new PropertyValueFactory<>(column.getModelAttributeName()));
-             tableView.getColumns().add(newColumn);
+            tableView.getColumns().add(newColumn);
         }
     }
 
     public void setItem(ObservableList<T> item) {
         tableView.setItems(item);
     }
-    public TableView.TableViewSelectionModel<T> getSelectionModels(){
+
+    public TableView.TableViewSelectionModel<T> getSelectionModels() {
         return tableView.getSelectionModel();
     }
 

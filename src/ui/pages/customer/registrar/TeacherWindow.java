@@ -14,10 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Program;
 import models.faculty.Teacher;
-import ui.customWidget.ComboList;
-import ui.customWidget.Inputs;
-import ui.customWidget.MyTableView;
-import ui.customWidget.RadioButtonGrid;
+import ui.customWidget.*;
 
 public class TeacherWindow {
     private BorderPane window;
@@ -29,48 +26,17 @@ public class TeacherWindow {
     TeacherWindow(BorderPane borderPane, ToolBar toolBar) {
         window = borderPane;
         setWindowTop(toolBar);
-        setWindowLeft();
+        window.setLeft(null);
         setWindowCenter();
         setWindowRight();
     }
 
     private void setWindowTop(ToolBar toolBar) {
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-
-        TextField search = new TextField();
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.TEACHER_INPUTS[0],
-                Constants.TEACHER_INPUTS[1],
-                Constants.TEACHER_INPUTS[2],
-                Constants.TEACHER_INPUTS[3],
-                Constants.TEACHER_INPUTS[4],
-                Constants.TEACHER_INPUTS[5],
-                Constants.TEACHER_INPUTS[6],
-                Constants.TEACHER_INPUTS[7],
-                Constants.TEACHER_INPUTS[8],
-                Constants.TEACHER_INPUTS[9],
-                Constants.TEACHER_INPUTS[10],
-                Constants.TEACHER_INPUTS[11],
-                Constants.TEACHER_INPUTS[12]
-        );
-
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
+        SearchTool searchTool = new SearchTool(Constants.TEACHER_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchTeacherWithCondition(Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
         });
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
     private void setWindowRight() {
@@ -106,18 +72,6 @@ public class TeacherWindow {
         scrollPane.setMinWidth(250);
 
         window.setRight(scrollPane);
-    }
-
-    private void setWindowLeft() {
-        ComboList comboList = new ComboList();
-        comboList.setUPComboList(
-                (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                }, (observable, oldValue, newValue) -> {
-                });
-        window.setLeft(comboList.getComboList());
     }
 
     private void setWindowCenter() {
@@ -162,22 +116,6 @@ public class TeacherWindow {
 
     }
 
-    public String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "id";
-        else if (i == 3) return "sex";
-        else if (i == 4) return "dateOfBirth";
-        else if (i == 5) return "phoneNumber";
-        else if (i == 6) return "city";
-        else if (i == 7) return "subCity";
-        else if (i == 8) return "street";
-        else if (i == 9) return "houseNo";
-        else if (i == 10) return "salary";
-        else if (i == 11) return "officeNumber";
-        else if (i == 12) return "rank";
-        else return "firstName";
-    }
-
     private void onSubmitButtonClicked() {
 
         DataBaseManagement.getInstance().insertDataIntoTable("Teacher",
@@ -199,7 +137,7 @@ public class TeacherWindow {
     }
 
     private void onEditButtonClicked() {
-        DataBaseManagement.getInstance().updateValueInTable("Student",
+        DataBaseManagement.getInstance().updateValueInTable("Teacher",
                 "id=\"" + id + "\"",
                 new ColumnValue<>(editExisting.getTextFieldValue(Constants.TEACHER_INPUTS[0]), "firstName"),
                 new ColumnValue<>(editExisting.getTextFieldValue(Constants.TEACHER_INPUTS[1]), "lastName"),
@@ -236,7 +174,7 @@ public class TeacherWindow {
             editExisting.setTextFieldValue(Constants.TEACHER_INPUTS[10], Double.toString(teacher.getSalary()));
             editExisting.setTextFieldValue(Constants.TEACHER_INPUTS[11], teacher.getOfficeNumber());
             editExisting.setTextFieldValue(Constants.TEACHER_INPUTS[12], teacher.getRank());
-            id = editExisting.getTextFieldValue(Constants.STUDENT_INPUTS[2]);
+            id = editExisting.getTextFieldValue(Constants.TEACHER_INPUTS[2]);
 
         });
     }

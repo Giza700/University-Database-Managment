@@ -1,9 +1,5 @@
 package models;
 
-import javafx.collections.ObservableList;
-
-import java.util.List;
-
 //TODO similar to what I stated in Section class.
 // The field values are retrieved from different tables
 // for phone_list we retrieve from Department_Phone table and
@@ -12,38 +8,33 @@ import java.util.List;
 // so we instantiate this class using the default constructor
 // instead of parametrized constructor as we will not have the values at once
 public class Department {
-    private String departmentCode;
+    private String departmentId;
     private String departmentName;
     private String buildingName;
     private int buildingNumber;
-    private ObservableList<Integer> officePhone;
-    private ObservableList<Integer> officeNumber;
-    private ObservableList<Course> coursesList;
+    private String collegeId;
+
 
     public Department(
-            String departmentCode,
+            String departmentId,
             String departmentName,
             String buildingName,
-            int buildingNumber
-            /*ObservableList<Integer> officePhone,
-            ObservableList<Integer> officeNumber,
-            ObservableList<Course> coursesList*/) {
+            int buildingNumber,
+            String collegeId) {
 
-        this.departmentCode = departmentCode;
+        this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.buildingName = buildingName;
         this.buildingNumber = buildingNumber;
-      /*  this.officePhone = officePhone;
-        this.officeNumber = officeNumber;
-        this.coursesList = coursesList;*/
+        this.collegeId = collegeId;
     }
 
-    public String getDepartmentCode() {
-        return departmentCode;
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartmentCode(String departmentCode) {
-        this.departmentCode = departmentCode;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getDepartmentName() {
@@ -70,27 +61,11 @@ public class Department {
         this.buildingNumber = buildingNumber;
     }
 
-    public ObservableList<Integer> getOfficePhone() {
-        return officePhone;
+    public String getCollegeId() {
+        return collegeId;
     }
 
-    public void setOfficePhone(ObservableList<Integer> officePhone) {
-        this.officePhone = officePhone;
-    }
-
-    public ObservableList<Integer> getOfficeNumber() {
-        return officeNumber;
-    }
-
-    public void setOfficeNumber(ObservableList<Integer> officeNumber) {
-        this.officeNumber = officeNumber;
-    }
-
-    public ObservableList<Course> getCoursesList() {
-        return coursesList;
-    }
-
-    public void setCoursesList(ObservableList<Course> coursesList) {
-        this.coursesList = coursesList;
+    public void setCollegeId(String collegeId) {
+        this.collegeId = collegeId;
     }
 }

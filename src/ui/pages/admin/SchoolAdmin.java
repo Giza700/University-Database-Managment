@@ -17,6 +17,7 @@ import ui.Validation;
 import ui.customWidget.Inputs;
 import ui.customWidget.MyTableView;
 import ui.customWidget.RadioButtonGrid;
+import ui.customWidget.SearchTool;
 
 public class SchoolAdmin {
     private BorderPane window;
@@ -33,34 +34,12 @@ public class SchoolAdmin {
         setWindowRight();
     }
     private void setWindowTop(ToolBar toolBar) {
-
-        ObservableList<String> department = FXCollections.observableArrayList();
-        department.addAll("SECE", "SCEE", "SMIE");
-
-        RadioButtonGrid radioButtonGrid = new RadioButtonGrid(
-                Constants.SCHOOLADMIN_INPUTS[0],
-                Constants.SCHOOLADMIN_INPUTS[1],
-                Constants.SCHOOLADMIN_INPUTS[2],
-                Constants.SCHOOLADMIN_INPUTS[3],
-                Constants.SCHOOLADMIN_INPUTS[4]
-        );
-        TextField search = new TextField();
-        search.setMinWidth(400);
-        search.setPromptText("Search");
-        search.textProperty().addListener((observable, oldValue, newValue) -> {
-                    searchResults.setItem(DataBaseManagement.getInstance().fetchSchoolAdminAccountWithCondition(getComparingColumn(radioButtonGrid.getSelectedRadio()), newValue));
-        }
-        );
-
-        HBox searchRow = new HBox();
-        searchRow.setSpacing(5);
-        searchRow.getChildren().addAll(search, radioButtonGrid.getRadioButtonGrid());
-
-        VBox searchBar = new VBox(searchRow, new Separator());
-        searchBar.setPadding(new Insets(10, 0, 0, 10));
-
-        window.setTop(new VBox(toolBar, searchBar));
-
+        SearchTool searchTool = new SearchTool(Constants.SCHOOLADMIN_INPUTS);
+        searchTool.setOnSearch((observable, oldValue, newValue) -> {
+            searchResults.setItem(DataBaseManagement.getInstance().fetchSchoolAdminAccountWithCondition(
+                    Constants.getComparingColumn(searchTool.getSelectedRadioButton()), newValue));
+        });
+        window.setTop(new VBox(toolBar, searchTool.getSearchBar()));
     }
 
 
@@ -120,17 +99,6 @@ public class SchoolAdmin {
 
 
     }
-
-    public static String getComparingColumn(int i) {
-        if (i == 1) return "lastName";
-        else if (i == 2) return "User Name";
-        else if (i == 3) return "Password";
-        else return "firstName";
-
-    }
-
-
-
 
     private void onSubmitButtonClicked() {
         if (Validation.validateName(addNew.getTextFieldValue(Constants.REGISTRAR_INPUTS[0])) != null ||

@@ -15,8 +15,10 @@ import javafx.scene.layout.*;
 public class Inputs {
 
     private GridPane gridPane;
-    private ComboBox<String> department;
     private ComboBox<String> colleges;
+    private ComboBox<String> department;
+    private ComboBox<String> program;
+
 
     public Inputs(String sectionWork,
                   EventHandler<ActionEvent> onSubmitClicked,
@@ -91,32 +93,38 @@ public class Inputs {
             clearFields();
             colleges.setValue(null);
             department.setValue(null);
+            program.setValue(null);
             department.setDisable(true);
+            program.setDisable(true);
         });
 
         colleges = new ComboBox<>();
         colleges.setItems(FXCollections.observableArrayList(Constants.colleges));
         colleges.setPromptText("College");
 
-
         department = new ComboBox<>();
-        department.setPromptText("department");
+        department.setPromptText("Department");
         department.setDisable(true);
+
+        program = new ComboBox<>();
+        program.setPromptText("Program");
+        program.setDisable(true);
 
 
         HBox hBox = new HBox(5, clearButton, submitButton);
         GridPane.setConstraints(colleges, 1, length + 1, 2, 1);
         GridPane.setConstraints(department, 1, length + 2, 2, 1);
+        GridPane.setConstraints(program, 1, length + 3, 2, 1);
 
         Label messageLabel = new Label();
         messageLabel.setId("messageLabel");
         messageLabel.setWrapText(true);
         messageLabel.getStylesheets().add("./ui/css/label.css");
 
-        GridPane.setConstraints(hBox, 0, length + 3, 2, 1);
+        GridPane.setConstraints(hBox, 1, length + 4, 2, 1);
         GridPane.setHalignment(hBox, HPos.RIGHT);
-        GridPane.setConstraints(messageLabel, 0, length + 4, 2, 1);
-        gridPane.getChildren().addAll(colleges, department, hBox, messageLabel);
+        GridPane.setConstraints(messageLabel, 0, length + 5, 2, 1);
+        gridPane.getChildren().addAll(colleges, department,program, hBox, messageLabel);
     }
 
     private void setUpTextFields(String sectionWork, String... inputs) {
@@ -223,6 +231,12 @@ public class Inputs {
                 return "Abebe159";
             case "Password":
                 return "Testing123";
+            case "Course Code":
+                return "ECEG-1204";
+            case "Name":
+                return "Database Systems";
+            case "Credit Hours":
+                return "5";
             default:
                 return "";
         }
@@ -234,6 +248,10 @@ public class Inputs {
 
     public ComboBox<String> getColleges() {
         return colleges;
+    }
+
+    public ComboBox<String> getProgram() {
+        return program;
     }
 
 }
